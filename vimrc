@@ -26,7 +26,7 @@ set expandtab
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-" for color schemes?
+" for color schemes
 colorscheme mustard
 set background=dark
 
