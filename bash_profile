@@ -384,7 +384,7 @@ function extract () {
   alias gba="git branch -a"
 
   alias emacs="/usr/local/Cellar/emacs/24.3/Emacs.app/Contents/MacOS/Emacs -nw"
-
+  alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim"
   
 # Final Configurations and Plugins
 # =====================

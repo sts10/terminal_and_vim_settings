@@ -2,22 +2,22 @@
 " after install, remember to `set background=dark`
 
 " GUI color definitions
-let s:gui00 = "000000"
-let s:gui01 = "111111"
-let s:gui02 = "222222"
-let s:gui03 = "333333"
-let s:gui04 = "444444"
-let s:gui05 = "555555"
-let s:gui06 = "666666"
-let s:gui07 = "777777"
-let s:gui08 = "888888"
-let s:gui09 = "999999"
-let s:gui0A = "aaaaaa"
-let s:gui0B = "bbbbbb"
-let s:gui0C = "cccccc"
-let s:gui0D = "dddddd"
-let s:gui0E = "eeeeee"
-let s:gui0F = "ffffff"
+let s:gui00 = "191919"
+let s:gui01 = "666666"
+let s:gui02 = "666666"
+let s:gui03 = "80a78c"
+let s:gui04 = "f7c527"
+let s:gui05 = "ffffff"
+let s:gui06 = "333333"
+let s:gui07 = "ffffff"
+let s:gui08 = "ec691e"
+let s:gui09 = "73e4f6"
+let s:gui0A = "ffffff"
+let s:gui0B = "a1d7f2"
+let s:gui0C = "73e4f6"
+let s:gui0D = "f7c527" 
+let s:gui0E = "ec691e"
+let s:gui0F = "f7c527"
 
 " Terminal color definitions
 
