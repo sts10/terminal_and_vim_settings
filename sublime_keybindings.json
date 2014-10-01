@@ -1,0 +1,222 @@
+// Neccessary packages:
+// Package Control, obviously https://sublime.wbond.net/
+// Sass and CoffeeScript syntax highlighting https://sublime.wbond.net/packages/Sass 
+// https://sublime.wbond.net/packages/CoffeeScript
+// Expand Selection to Quotes https://sublime.wbond.net/packages/Expand%20Selection%20to%20Quotes
+// SublimeERB https://sublime.wbond.net/packages/SublimeERB 
+// (Could try ERB Autocomplete https://sublime.wbond.net/packages/ERB%20Autocomplete)
+// One of the Markdown packages
+
+[
+  { "keys": ["alt+s"], "command": "toggle_side_bar" },
+  { "keys": ["control+s"], "command": "toggle_side_bar" },
+
+  { "keys": ["control+m"], "command": "toggle_minimap" },  
+
+  { "keys": ["super+shift+forward_slash"], "command": "toggle_comment", "args": { "block": true } },
+
+  { "keys": ["super+v"], "command": "paste_and_indent" },
+  { "keys": ["super+shift+v"], "command": "paste" },
+
+  {
+    "keys": ["super+alt+right"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.38, 1.0],
+      "rows": [0.0, 1.0],
+      "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+    }
+  },
+
+  {
+    "keys": ["super+alt+left"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.62, 1.0],
+      "rows": [0.0, 1.0],
+      "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+    }
+  },
+
+  // These two would be for using up and down as a 2-window row command
+
+  // {
+  //   "keys": ["super+alt+up"],
+  //   "command": "set_layout",
+  //   "args":
+  //   {
+  //     "cols": [0.0, 1.0],
+  //     "rows": [0.0, 0.38, 1.0],
+  //     "cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
+      
+  //   }
+  // },
+
+  // {
+  //   "keys": ["super+alt+down"],
+  //   "command": "set_layout",
+  //   "args":
+  //   {
+  //     "cols": [0.0, 1.0],
+  //     "rows": [0.0, 0.62, 1.0],
+  //     "cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
+  //   }
+  // },
+
+  {
+    "keys": ["super+alt+up"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.5, 1.0],
+      "rows": [0.0, 0.38, 1.0],
+      "cells":
+      [
+        [0, 0, 1, 1], [1, 0, 2, 1],
+        [0, 1, 1, 2], [1, 1, 2, 2]
+      ]
+    }
+  },
+
+  {
+    "keys": ["super+alt+down"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.5, 1.0],
+      "rows": [0.0, 0.62, 1.0],
+      "cells":
+      [
+        [0, 0, 1, 1], [1, 0, 2, 1],
+        [0, 1, 1, 2], [1, 1, 2, 2]
+      ]
+    }
+  },
+
+  {
+    "keys": ["super+alt+3"],
+    "command": "set_layout",
+    "args": 
+    {
+       "cols": [0.0, 0.5, 1.0],
+       "rows": [0.0, 0.5, 1.0],
+       "cells": [
+           [0, 0, 1, 1],
+           [0, 1, 1, 2],
+           [1, 0, 2, 2]
+       ]
+    }
+  },
+
+
+
+  {
+    "keys": ["super+alt+;"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.38, 1.0],
+      "rows": [0.0, 0.62, 1.0],
+      "cells":
+      [
+        [0, 0, 1, 1], [1, 0, 2, 1],
+        [0, 1, 1, 2], [1, 1, 2, 2]
+      ]
+    }
+  },
+
+  {
+    "keys": ["super+alt+l"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.62, 1.0],
+      "rows": [0.0, 0.62, 1.0],
+      "cells":
+      [
+        [0, 0, 1, 1], [1, 0, 2, 1],
+        [0, 1, 1, 2], [1, 1, 2, 2]
+      ]
+    }
+  },
+
+  {
+    "keys": ["super+alt+."],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.62, 1.0],
+      "rows": [0.0, 0.38, 1.0],
+      "cells":
+      [
+        [0, 0, 1, 1], [1, 0, 2, 1],
+        [0, 1, 1, 2], [1, 1, 2, 2]
+      ]
+    }
+  },
+
+  {
+    "keys": ["super+alt+/"],
+    "command": "set_layout",
+    "args":
+    {
+      "cols": [0.0, 0.38, 1.0],
+      "rows": [0.0, 0.38, 1.0],
+      "cells":
+      [
+        [0, 0, 1, 1], [1, 0, 2, 1],
+        [0, 1, 1, 2], [1, 1, 2, 2]
+      ]
+    }
+  },
+
+
+  { "keys": ["alt+1"], "command": "move_to_group", "args": { "group": 0 } },
+  { "keys": ["alt+2"], "command": "move_to_group", "args": { "group": 1 } },
+  { "keys": ["alt+3"], "command": "move_to_group", "args": { "group": 2 } },
+  { "keys": ["alt+4"], "command": "move_to_group", "args": { "group": 3 } },
+
+  { "keys": ["super+shift+."], "command": "erb" },
+
+  { "keys": ["super+shift+space"], "command": "expand_region" },
+
+  { "keys": ["super+'"], "command": "expand_selection_to_quotes" },
+  { "keys": ["super+,"], "command": "expand_selection", "args": {"to": "tag"} },
+  { "keys": ["super+9"], "command": "expand_selection", "args": {"to": "brackets"} },
+  { "keys": ["super+;"], "command": "expand_selection", "args": {"to": "indentation"} },
+  // { "keys": ["super+t"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+
+  { "keys": ["super+up"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false} },
+  { "keys": ["super+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true} },
+  { "keys": ["shift+super+up"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false, "extend": true}},
+  { "keys": ["shift+super+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true, "extend": true}},
+
+
+  // emacs alt+ movement emulation  
+  { "keys": ["alt+p"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false} },
+  { "keys": ["alt+n"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true} },
+  { "keys": ["shift+alt+p"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false, "extend": true}},
+  { "keys": ["shift+alt+n"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true, "extend": true}},
+
+  { "keys": ["alt+b"], "command": "move", "args": {"by": "subwords", "forward": false} },
+  { "keys": ["alt+f"], "command": "move", "args": {"by": "subword_ends", "forward": true} },
+  { "keys": ["alt+shift+b"], "command": "move", "args": {"by": "subwords", "forward": false, "extend": true} },
+  { "keys": ["alt+shift+f"], "command": "move", "args": {"by": "subword_ends", "forward": true, "extend": true} },
+
+
+  // vintage mode 
+  // double-tap i to exit insert mode (and return to command mode)
+  { "keys": ["i", "i"], "command": "exit_insert_mode",
+    "context":
+    [
+      { "key": "setting.command_mode", "operand": false },
+      { "key": "setting.is_widget", "operand": false }
+    ]
+  }
+
+
+]
+
+
