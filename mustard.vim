@@ -33,11 +33,11 @@ let s:cterm05 = "07"
 " light theme background
 let s:cterm07 = "15"
 
-" Python defs (and maybe if / elses): 236, 105, 32
-let s:cterm08 = "09"
+" instance variables, Python defs (and maybe if / elses): 236, 105, 32
+let s:cterm08 = "11"
 
-" template variables: 248,248,242
-let s:cterm0A = "07"
+" class names, object names, while, end, template variables: 236, 215, 149
+let s:cterm0A = "11"
 
 " Ruby strings: 161,215,242
 let s:cterm0B = "12"
