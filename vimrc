@@ -131,6 +131,9 @@ noremap K 10k
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
 " D deletes to the end of the line, as it should
 noremap D d$
 
@@ -141,6 +144,19 @@ vmap X "_d
 
 " Control + p pastes from the 'yank register', and the ] formats it to indent you're pasting into (http://vimcasts.org/episodes/meet-the-yank-register/)
 nmap <c-p> "0]P
+
+" use leader to interact with the system clipboard 
+nnoremap <Leader>p "*]P
+nnoremap <Leader>v "*]P
+vnoremap <Leader>y "*y
+vnoremap <Leader>c "*c
+vnoremap <Leader>d "*d
+
+"nnoremap <D-v> "*P
+"inoremap <D-V> <Esc>"*Pi
+
+" place whole file on the system clipboard (and return cursor to where it was)
+nmap <Leader>a maggVG"*y`a
 
 
 if !exists( "*RubyEndToken" )
