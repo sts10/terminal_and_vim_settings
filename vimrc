@@ -94,6 +94,10 @@ filetype on
 filetype plugin on
 filetype indent on
 
+" turn on spell check for markdown files
+autocmd FileType markdown setlocal spell spelllang=en_us
+"autocmd FileType markdown set complete+=kspell 
+
 " Turn on auto-complete for various languages, plus re map tab to Ctrl+P
 " (auto-complete command)
 set omnifunc=syntaxcomplete#Complete
@@ -151,12 +155,17 @@ nmap X "_dd
 " In visual mode, X removes selection without placing it in the default registry
 vmap X "_d
 
-" Control + p pastes from the 'yank register', and the ] formats it to indent you're pasting into (http://vimcasts.org/episodes/meet-the-yank-register/)
+" 0 is the 'yank register', and the ] formats it to indent you're pasting into. This command does all that with control + p (from http://vimcasts.org/episodes/meet-the-yank-register/)
 nmap <c-p> "0]P
 
 " use leader to interact with the system clipboard 
 nnoremap <Leader>p "*]P
 nnoremap <Leader>v "*]P
+
+nnoremap <Leader>y ma^"*y$`a
+nnoremap <Leader>c ^"*c$
+nnoremap <Leader>d ^"*d$
+
 vnoremap <Leader>y "*y
 vnoremap <Leader>c "*c
 vnoremap <Leader>d "*d
