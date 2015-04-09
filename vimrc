@@ -148,12 +148,13 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
 " D deletes to the end of the line, as it should
-noremap D d$
+nnoremap D d$
 
 " X removes line without placing it in the default registry
 nmap X "_dd
 " In visual mode, X removes selection without placing it in the default registry
 vmap X "_d
+vmap x "_d
 
 " 0 is the 'yank register', and the ] formats it to indent you're pasting into. This command does all that with control + p (from http://vimcasts.org/episodes/meet-the-yank-register/)
 nmap <c-p> "0]P
