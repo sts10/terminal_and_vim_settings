@@ -152,6 +152,7 @@ nnoremap D d$
 
 " X removes line without placing it in the default registry
 nmap X "_dd
+
 " In visual mode, X removes selection without placing it in the default registry
 vmap X "_d
 vmap x "_d
@@ -160,8 +161,10 @@ vmap x "_d
 nmap <c-p> "0]P
 
 " use leader to interact with the system clipboard 
-nnoremap <Leader>p "*]P
-nnoremap <Leader>v "*]P
+nnoremap <Leader>p "*]p
+nnoremap <Leader>P "*]P
+nnoremap <Leader>v "*]p
+nnoremap <Leader>V "*]P
 
 nnoremap <Leader>y ma^"*y$`a
 nnoremap <Leader>c ^"*c$
