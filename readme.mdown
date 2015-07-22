@@ -9,6 +9,6 @@ This is a snapshot of four of my terminal-related configuration files. This is t
 
 3. mustard.vim is a vim colorscheme I made to mirror my preferred sublime Text 2 theme, [Mustard](http://devthemez.com/themes/mustard). To use, place mustard.vim into ~/.vim/colors/ (which you may have to mkdir yourself). Then either run `:colorscheme mustard` then `set background=dark` or put those two commands into your .vimrc (they're already in my .vimrc file)
 
-4. My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download) (for Terminal and Sublime Text)
+4. My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download) (for Terminal and Sublime Text). [More on my setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/).
 
 4. `sts_sep_2014.terminal` can be imported as a profile in your Terminal application for OS X.
