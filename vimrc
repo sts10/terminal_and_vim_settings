@@ -61,9 +61,13 @@ set sc
 set backspace=2
 
 " set tab as 4 spaces
-set tabstop=4
-set shiftwidth=4
 set expandtab
+set tabstop=2
+set shiftwidth=2
+
+" tabs are 4 spaces for python files, cuz lol python
+autocmd FileType python set tabstop=4
+autocmd FileType python set shiftwidth=4
 
 " auto indent
 set autoindent
@@ -146,6 +150,10 @@ nnoremap <S-Tab> <<
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+
+" In markdown files, Control + a surrounds highlighted text with square
+" brackets, then dumps system clipboard contents into parenthesis
+autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>a](<Esc>"*]pa)<Esc>
 
 " D deletes to the end of the line, as it should
 nnoremap D d$
