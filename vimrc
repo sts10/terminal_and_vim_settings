@@ -14,6 +14,10 @@ noremap <C-n> :NERDTreeToggle<CR>
 " Allows you to quit vim if the only window left open is a NERDTree (https://github.com/scrooloose/nerdtree) 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+"Allows NERDTree to display hidden files
+"let NERDTreeShowHidden=1
+"let NERDTreeIgnore=['.DS_Store', '.git/']
+
 " map comment and uncomment from NERDCommenter (https://github.com/scrooloose/nerdcommenter)
 nmap <C-l> <Leader>c<Space>
 vmap <C-l> <Leader>c<Space>gv
@@ -26,27 +30,46 @@ vmap <C-k> [egv
 vmap <C-j> ]egv
 
 " vim multiple cursors plugin (https://github.com/terryma/vim-multiple-cursors)
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-f>'
-let g:multi_cursor_prev_key='<C-g>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
+"let g:multi_cursor_use_default_mapping=0
+"let g:multi_cursor_next_key='<C-f>'
+"let g:multi_cursor_prev_key='<C-g>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<Esc>'
+
+" Markdown to HTML 
+nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 """""""""""""""""""""""""""""
 " Standard Set Up           "
 """""""""""""""""""""""""""""
 
-" Display line numbers
-" set number
+" Display relative line numbers
+set relativenumber
+" display the absolute line number at the line you're on
+set nu!
+" Keep the line number gutter narrow
+set numberwidth=2
+
+autocmd FileType markdown set norelativenumber
+autocmd FileType markdown set nonumber
 
 " Screen scrolls 3 lines in front of the cursor 
 set scrolloff=5
 
-" Have Vim break lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
+" by default don't wrap lines
+set nowrap 
+
+" But do wrap on these types of files...
+autocmd FileType markdown set wrap
+autocmd FileType html set wrap
+autocmd FileType css set wrap
+autocmd FileType txt set wrap
+
+" And when Vim down wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
 set linebreak
 
 " set font for gui vim
-set guifont=DejaVu\ Sans\ Mono:h17
+set guifont=DejaVu\ Sans\ Mono:h20
 " for color scheme
 colorscheme mustard
 set background=dark
@@ -71,6 +94,8 @@ autocmd FileType python set shiftwidth=4
 
 " auto indent
 set autoindent
+set smartindent 
+
 " turn on the wildmenu cuz everyone says to
 set wildmenu
 " search characters as they're entered
@@ -128,8 +153,10 @@ nmap <S-Enter> O<Esc>
 "nnoremap N Nzzzv
 
 " j and k don't skip over wrapped lines
-nnoremap j gj
-nnoremap k gk
+autocmd FileType html nnoremap j gj
+autocmd FileType markdown nnoremap j gj
+autocmd Filetype html nnoremap k gk
+autocmd Filetype markdown nnoremap k gk
 
 " H to beginning of line, L to the end
 noremap H ^
@@ -153,13 +180,14 @@ vnoremap <S-Tab> <gv
 
 " In markdown files, Control + a surrounds highlighted text with square
 " brackets, then dumps system clipboard contents into parenthesis
-autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>a](<Esc>"*]pa)<Esc>
+autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 
 " D deletes to the end of the line, as it should
 nnoremap D d$
 
 " X removes line without placing it in the default registry
 nmap X "_dd
+"nmap X "_d$
 
 " In visual mode, X removes selection without placing it in the default registry
 vmap X "_d
@@ -195,11 +223,41 @@ nnoremap <Space>f <C-w>5>
 "nnoremap <Space>T <C-w>5-
 "nnoremap <Space>F <C-w>5<
 
+"map <Leader>t for tab navigation
+nmap <Leader>t gt
+nmap <Leader>T gT
+
 " Allow some of the emacs motions on the vim command line.
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-B> <Left>
 cnoremap <C-F> <Right>
+
+function UrlToArticle()
+  let url = getline('.')
+  read(!ruby /Users/samschlinkert/Documents/code/em/url_to_article.rb getline('.'))
+  " this works when run in command mode: 
+  " :read !ruby /Users/samschlinkert/Documents/code/em/url_to_article.rb http://samschlinkert.com
+  "let @a = read \"!ruby /Users/samschlinkert/Documents/code/em/url_to_article.rb " url 
+  "put a
+endfunction
+
+nmap <leader>l :call UrlToArticle()
+
+function CleanAndTweet()
+
+    let lineText = getline('.')
+    "let escapedLine = substitute(lineText, "\"", "\\\"", "g")
+    "let escapedLine = substitute(lineText, "'", "\'", "g")
+    "nmap <leader>t :exec '!t update"'escapedLine'"'
+    "return escapedLine
+    let tweet = lineText 
+    "execute '!t update "'escapedLine'"'
+    execute "!t update '" tweet "'"
+endfunction
+
+"nmap <leader>tweet :call CleanAndTweet() 
+
 
 if !exists( "*RubyEndToken" )
     function RubyEndToken()
