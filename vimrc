@@ -50,8 +50,8 @@ set nu!
 " Keep the line number gutter narrow
 set numberwidth=2
 
-autocmd FileType markdown set norelativenumber
-autocmd FileType markdown set nonumber
+autocmd FileType markdown setlocal norelativenumber
+autocmd FileType markdown setlocal nonumber
 
 " Screen scrolls 3 lines in front of the cursor 
 set scrolloff=5
@@ -60,10 +60,10 @@ set scrolloff=5
 set nowrap 
 
 " But do wrap on these types of files...
-autocmd FileType markdown set wrap
-autocmd FileType html set wrap
-autocmd FileType css set wrap
-autocmd FileType txt set wrap
+autocmd FileType markdown setlocal wrap
+autocmd FileType html setlocal wrap
+autocmd FileType css setlocal wrap
+autocmd FileType txt setlocal wrap
 
 " And when Vim down wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
 set linebreak
@@ -89,8 +89,8 @@ set tabstop=2
 set shiftwidth=2
 
 " tabs are 4 spaces for python files, cuz lol python
-autocmd FileType python set tabstop=4
-autocmd FileType python set shiftwidth=4
+autocmd FileType python setlocal tabstop=4
+autocmd FileType python setlocal shiftwidth=4
 
 " auto indent
 set autoindent
@@ -125,7 +125,9 @@ filetype indent on
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
-"autocmd FileType markdown set complete+=kspell 
+" add the spelling dictionary to the end of the list of sources to check for
+" auto completion
+autocmd FileType markdown setlocal complete+=kspell 
 
 " Turn on auto-complete for various languages, plus re map tab to Ctrl+P
 " (auto-complete command)
@@ -278,7 +280,7 @@ if !exists( "*RubyEndToken" )
     endfunction
 endif
 
-autocmd FileType ruby imap <buffer> <CR> <C-R>=RubyEndToken()<CR>
+"autocmd FileType ruby imap <buffer> <CR> <C-R>=RubyEndToken()<CR>
 
 
 if !exists( "*BracesEndToken" )
