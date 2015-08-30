@@ -8,15 +8,10 @@ let mapleader = ","
 " PLUG-IN SETTINGS            "
 """""""""""""""""""""""""""""""
 
-" Control + n to toggle NERDTree sidebar
-noremap <C-n> :NERDTreeToggle<CR>
-
-" Allows you to quit vim if the only window left open is a NERDTree (https://github.com/scrooloose/nerdtree) 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-"Allows NERDTree to display hidden files
-"let NERDTreeShowHidden=1
-"let NERDTreeIgnore=['.DS_Store', '.git/']
+" Ctrl- P mapping and two custom split keymappings (https://github.com/kien/ctrlp.vim)
+let g:ctrlp_map = '<c-p>'
+nmap <c-n>s :split<CR><c-w>j<c-p>
+nmap <c-n>v :vsplit<CR><c-w>l<c-p>
 
 " map comment and uncomment from NERDCommenter (https://github.com/scrooloose/nerdcommenter)
 nmap <C-l> <Leader>c<Space>
@@ -29,12 +24,6 @@ nmap <C-j> ]e
 vmap <C-k> [egv
 vmap <C-j> ]egv
 
-" vim multiple cursors plugin (https://github.com/terryma/vim-multiple-cursors)
-"let g:multi_cursor_use_default_mapping=0
-"let g:multi_cursor_next_key='<C-f>'
-"let g:multi_cursor_prev_key='<C-g>'
-"let g:multi_cursor_skip_key='<C-x>'
-"let g:multi_cursor_quit_key='<Esc>'
 
 " Markdown to HTML 
 nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
@@ -135,15 +124,12 @@ set omnifunc=syntaxcomplete#Complete
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-imap <Tab> <C-P>
+"imap <Tab> <C-P>
 
 
 """""""""""""""""""""""""""""""""
 " My Re-Mappings                "
 """""""""""""""""""""""""""""""""
-
-" ii to leave insert mode and return to normal mode 
-imap ii <Esc>
 
 " Enter gives a new line when in command mode without entering insert mode. Likewise, shift+enter gives a new line
 " above the cursor 
@@ -196,7 +182,7 @@ vmap X "_d
 vmap x "_d
 
 " 0 is the 'yank register', and the ] formats it to indent you're pasting into. This command does all that with control + p (from http://vimcasts.org/episodes/meet-the-yank-register/)
-nmap <c-p> "0]P
+"nmap <c-p> "0]P
 
 " use leader to interact with the system clipboard 
 nnoremap <Leader>p "*]p
@@ -211,9 +197,6 @@ nnoremap <Leader>d ^"*d$
 vnoremap <Leader>y "*y
 vnoremap <Leader>c "*c
 vnoremap <Leader>d "*d
-
-"nnoremap <D-v> "*P
-"inoremap <D-V> <Esc>"*Pi
 
 " place whole file on the system clipboard (and return cursor to where it was)
 nmap <Leader>a maggVG"*y`a
@@ -244,21 +227,7 @@ function UrlToArticle()
   "put a
 endfunction
 
-nmap <leader>l :call UrlToArticle()
-
-function CleanAndTweet()
-
-    let lineText = getline('.')
-    "let escapedLine = substitute(lineText, "\"", "\\\"", "g")
-    "let escapedLine = substitute(lineText, "'", "\'", "g")
-    "nmap <leader>t :exec '!t update"'escapedLine'"'
-    "return escapedLine
-    let tweet = lineText 
-    "execute '!t update "'escapedLine'"'
-    execute "!t update '" tweet "'"
-endfunction
-
-"nmap <leader>tweet :call CleanAndTweet() 
+"nmap <leader>l :call UrlToArticle()
 
 
 if !exists( "*RubyEndToken" )
@@ -298,3 +267,4 @@ endif
 
 autocmd FileType javascript imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
 autocmd FileType css imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
+
