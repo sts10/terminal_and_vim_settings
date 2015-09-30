@@ -2,8 +2,9 @@
 " after install, remember to `set background=dark`
 
 " GUI color definitions
-let s:gui00 = "191919"
-let s:gui01 = "666666"
+let s:gui00 = "202020"
+" 01 and 02 were 666666
+let s:gui01 = "333333"
 let s:gui02 = "666666"
 let s:gui03 = "80a78c"
 let s:gui04 = "f7c527"
