@@ -1,5 +1,40 @@
 " Use Pathogen package control (https://github.com/tpope/vim-pathogen) 
-execute pathogen#infect()
+"execute pathogen#infect()
+
+" Use Vundle to handle plugins
+set nocompatible
+filetype off " temporarily turn this off so Vundle works correctly
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" plugin for a GitHub repo:
+Plugin 'kien/ctrlp.vim'
+Plugin 'terryma/vim-smooth-scroll'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'sickill/vim-pasta'
+Plugin 'justinmk/vim-sneak'
+Plugin 'tpope/vim-vinegar'
+Plugin 'ervandew/supertab'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-surround'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+
 
 " set leader to comma
 let mapleader = ","
@@ -24,13 +59,33 @@ nmap <C-j> ]e
 vmap <C-k> [egv
 vmap <C-j> ]egv
 
+" git@github.com:terryma/vim-smooth-scroll.git
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 30, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 30, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
+
 
 " Markdown to HTML 
 nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
+""""""""""""""""""""""""""""
+" NeoVim Specific          "
+""""""""""""""""""""""""""""
+
+if has("nvim")
+  set t_Co=256
+  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
 """""""""""""""""""""""""""""
 " Standard Set Up           "
 """""""""""""""""""""""""""""
+
+" More colors
+if !has('gui_running')
+  "set t_Co=256
+endif
 
 " Display relative line numbers
 set relativenumber
@@ -39,6 +94,7 @@ set nu!
 " Keep the line number gutter narrow
 set numberwidth=2
 
+" no line numbers in markdown files
 autocmd FileType markdown setlocal norelativenumber
 autocmd FileType markdown setlocal nonumber
 
@@ -48,6 +104,9 @@ set scrolloff=5
 " by default don't wrap lines
 set nowrap 
 
+" show two status lines
+set laststatus=2
+
 " But do wrap on these types of files...
 autocmd FileType markdown setlocal wrap
 autocmd FileType html setlocal wrap
@@ -56,6 +115,13 @@ autocmd FileType txt setlocal wrap
 
 " And when Vim down wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
 set linebreak
+
+" Save temporary/backup files not in the local directory, but in your ~/.vim
+" directory, to keep them out of git repos. 
+" Pretty sure you need to mkdir backup, swap, and undo first to make this work
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
@@ -72,7 +138,7 @@ set sc
 " specify backspace to work as you'd expect (http://vim.wikia.com/wiki/Backspace_and_delete_problems)
 set backspace=2
 
-" set tab as 4 spaces
+" set tab as 2 spaces
 set expandtab
 set tabstop=2
 set shiftwidth=2
@@ -92,7 +158,7 @@ set incsearch
 " have vim re-load files when they're changed outside of vim
 set autoread
 
-" search search case to a good configuration http://vim.wikia.com/wiki/Searching 
+" set search case to a good configuration http://vim.wikia.com/wiki/Searching 
 set ignorecase
 set smartcase
 
@@ -118,12 +184,13 @@ autocmd FileType markdown setlocal spell spelllang=en_us
 " auto completion
 autocmd FileType markdown setlocal complete+=kspell 
 
-" Turn on auto-complete for various languages, plus re map tab to Ctrl+P
-" (auto-complete command)
+" Turn on auto-complete for various languages
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+
+
 "imap <Tab> <C-P>
 
 
@@ -156,12 +223,13 @@ inoremap <c-a> <Esc>I
 inoremap <c-e> <Esc>A
 
 " J and K move up and down 10 lines
-noremap J 10j
-noremap K 10k
+"noremap J 10j
+"noremap K 10k
 
-" Tab and Shift tab to indent and un-indent
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
+" Tab and Shift tab to indent and un-indent (turning this off considering I'm
+" using SuperTab plugin now?)
+"nnoremap <Tab> >>
+"nnoremap <S-Tab> <<
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -175,7 +243,6 @@ nnoremap D d$
 
 " X removes line without placing it in the default registry
 nmap X "_dd
-"nmap X "_d$
 
 " In visual mode, X removes selection without placing it in the default registry
 vmap X "_d
@@ -183,6 +250,12 @@ vmap x "_d
 
 " 0 is the 'yank register', and the ] formats it to indent you're pasting into. This command does all that with control + p (from http://vimcasts.org/episodes/meet-the-yank-register/)
 "nmap <c-p> "0]P
+
+" Make the * command a bit more like Sublime's Multiple Cursor
+"nmap * *viw<Esc>NNgn
+vmap * <Esc>ngn
+" remap * to stay at first match
+"nmap * *N 
 
 " use leader to interact with the system clipboard 
 nnoremap <Leader>p "*]p
@@ -267,4 +340,3 @@ endif
 
 autocmd FileType javascript imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
 autocmd FileType css imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
-
