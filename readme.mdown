@@ -1,6 +1,6 @@
-# A Back-up of My Terminal Files
+# A Back-up of My Terminal and Text Editor Setup Files
 
-This is a snapshot of four of my terminal-related configuration files. This is their state of Septemeber 7th, 2014, admittedly one of my first full days using Vim. So the .vimrc file will most likely change if I keep using the program.  
+This is a snapshot of my terminal and Vim-related configuration files. 
 
 ## To Use
 
