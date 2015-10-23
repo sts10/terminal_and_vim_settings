@@ -102,8 +102,6 @@ set scrolloff=5
 " by default don't wrap lines
 set nowrap 
 
-" show two status lines
-set laststatus=2
 
 " But do wrap on these types of files...
 autocmd FileType markdown setlocal wrap
@@ -113,6 +111,9 @@ autocmd FileType txt setlocal wrap
 
 " And when Vim down wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
 set linebreak
+
+" show two status lines
+set laststatus=2
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos. 
@@ -173,8 +174,8 @@ set foldmethod=syntax
 
 " Some stuff everyone says you need
 filetype on
-filetype plugin on
 filetype indent on
+filetype plugin on
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
@@ -188,10 +189,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
-
-"imap <Tab> <C-P>
-
-
+"
 """""""""""""""""""""""""""""""""
 " My Re-Mappings                "
 """""""""""""""""""""""""""""""""
@@ -200,10 +198,6 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 " above the cursor 
 nmap <CR> o<Esc>
 nmap <S-Enter> O<Esc>
-
-" When searching, center the result in the middle of the screen
-"nnoremap n nzzzv
-"nnoremap N Nzzzv
 
 " j and k don't skip over wrapped lines
 autocmd FileType html nnoremap j gj
