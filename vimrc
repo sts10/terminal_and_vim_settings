@@ -1,5 +1,3 @@
-" Use Pathogen package control (https://github.com/tpope/vim-pathogen) 
-"execute pathogen#infect()
 
 " Use Vundle to handle plugins
 set nocompatible
