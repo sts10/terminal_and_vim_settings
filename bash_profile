@@ -389,11 +389,16 @@ function extract () {
 # Final Configurations and Plugins
 # =====================
   # Git Bash Completion
-  # Will activate bash git completion if installed
-  # via homebrew
-  if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+  # Will activate bash git completion if installed via homebrew
+  # (via: http://apple.stackexchange.com/questions/154701/git-autocompletion-is-not-working-with-homebrew?answertab=votes#tab-top)
+  if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
+      . `brew --prefix`/etc/bash_completion.d/git-completion.bash
   fi
+
+  # if you're using OS X versions before Yosemite (10.10.5), use this:
+  #if [ -f `brew --prefix`/etc/bash_completion ]; then
+    #. `brew --prefix`/etc/bash_completion
+  #fi
 
   # RVM
   # Mandatory loading of RVM into the shell
