@@ -64,15 +64,15 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 
 
-" Markdown to HTML 
-nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
+" Markdown to HTML (Uncomment if properly installed)
+"nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 """"""""""""""""""""""""""""
 " NeoVim Specific          "
 """"""""""""""""""""""""""""
 
 if has("nvim")
-  set t_Co=256
+  "set t_Co=256
   "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
@@ -96,7 +96,7 @@ set numberwidth=2
 autocmd FileType markdown setlocal norelativenumber
 autocmd FileType markdown setlocal nonumber
 
-" Screen scrolls 3 lines in front of the cursor 
+" Screen scrolls 5 lines in front of the cursor 
 set scrolloff=5
 
 " by default don't wrap lines
@@ -211,17 +211,16 @@ noremap L $
 
 "noremap <c-a> ^
 "noremap <c-e> $
-inoremap <c-a> <Esc>I
-inoremap <c-e> <Esc>A
+"inoremap <c-a> <Esc>I
+"inoremap <c-e> <Esc>A
 
 " J and K move up and down 10 lines
 "noremap J 10j
 "noremap K 10k
 
-" Tab and Shift tab to indent and un-indent (turning this off considering I'm
-" using SuperTab plugin now?)
-"nnoremap <Tab> >>
-"nnoremap <S-Tab> <<
+" Tab and Shift tab to indent and un-indent
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -245,7 +244,7 @@ vmap x "_d
 
 " Make the * command a bit more like Sublime's Multiple Cursor
 "nmap * *viw<Esc>NNgn
-vmap * <Esc>ngn
+"vmap * <Esc>ngn
 " remap * to stay at first match
 "nmap * *N 
 
@@ -282,17 +281,6 @@ cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-B> <Left>
 cnoremap <C-F> <Right>
-
-function UrlToArticle()
-  let url = getline('.')
-  read(!ruby /Users/samschlinkert/Documents/code/em/url_to_article.rb getline('.'))
-  " this works when run in command mode: 
-  " :read !ruby /Users/samschlinkert/Documents/code/em/url_to_article.rb http://samschlinkert.com
-  "let @a = read \"!ruby /Users/samschlinkert/Documents/code/em/url_to_article.rb " url 
-  "put a
-endfunction
-
-"nmap <leader>l :call UrlToArticle()
 
 
 if !exists( "*RubyEndToken" )
