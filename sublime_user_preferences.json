@@ -6,12 +6,12 @@
     "font_size": 21.0,
     "ignored_packages":
     [
-        "Markdown",
-        "Sublime Block Cursor",
         "ERBAutocomplete",
-        "Python Pep8 Lint"
+        "Markdown",
+        "Python Pep8 Lint",
+        "Sublime Block Cursor"
     ],
-    "tab_size": 4,
+    "tab_size": 2,
     "translate_tabs_to_spaces": true,
     "vintage_ctrl_keys": false,
     "vintage_start_in_command_mode": false,
