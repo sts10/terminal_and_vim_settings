@@ -1,5 +1,5 @@
-" Use Vundle to handle plugins
 set nocompatible
+" Vundle Settings {{{
 filetype off " temporarily turn this off so Vundle works correctly
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -18,7 +18,7 @@ Plugin 'ervandew/supertab'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
-
+Plugin 'junegunn/goyo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -33,13 +33,14 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
+" }}}
 
-
-" set leader to apostrophe (msutr use backtick [`] for marks as a result)
+" Set Leader {{{
 let mapleader = "'"
+" }}}
 
 """""""""""""""""""""""""""""""
-" PLUG-IN SETTINGS            "
+" Plugin Settings             " {{{
 """""""""""""""""""""""""""""""
 
 " Ctrl- P mapping and two custom split keymappings (https://github.com/kien/ctrlp.vim)
@@ -77,20 +78,37 @@ nmap <Space> <Plug>Sneak_s
 " and then page using , rather than ; but it's not quite the same.
 nmap <S-Space> <Plug>Sneak_S
 
+" Sneak highlighting colors. See :h sneak or https://github.com/justinmk/vim-sneak/blob/master/doc/sneak.txt
+"hi link SneakPluginTarget ErrorMsg
+"hi link SneakPluginScope  Comment
+
+" Goyo (distraction-free)
+let g:goyo_width="80%"
+nmap <Leader>g :Goyo<CR>
+function! s:goyo_enter()
+  set scrolloff=999
+endfunction
+function! s:goyo_leave()
+  set scrolloff=5
+endfunction
+
 " Markdown to HTML 
 nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
+" }}}
+
 """"""""""""""""""""""""""""
-" NeoVim Specific          "
+" NeoVim Specific          " {{{
 """"""""""""""""""""""""""""
 
 if has("nvim")
   "set t_Co=256
-  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
+" }}}
 
 """""""""""""""""""""""""""""
-" Standard Set Up           "
+" Standard Set Up           " {{{ 
 """""""""""""""""""""""""""""
 
 " More colors
@@ -187,7 +205,9 @@ set visualbell
 set foldenable
 set foldlevelstart=10
 set foldnestmax=10
-set foldmethod=syntax
+"set foldmethod=syntax
+set foldmethod=marker
+autocmd FileType vim setlocal foldmethod=marker
 
 " Some stuff everyone says you need
 filetype on
@@ -206,10 +226,15 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
+" }}}
 
 """""""""""""""""""""""""""""""""
-" My Re-Mappings                "
+" My Re-Mappings                " {{{
 """""""""""""""""""""""""""""""""
+
+" Quickly open a vertical split of my VIMRC and source my VIMRC
+nnoremap <silent> <leader>ev :vs $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Enter gives a new line when in command mode without entering insert mode. Likewise, shift+enter gives a new line
 " above the cursor 
@@ -231,14 +256,13 @@ nnoremap L $
 "inoremap <c-a> <Esc>I
 "inoremap <c-e> <Esc>A
 
-" J and K move up and down 10 lines
-"noremap J 10j
-"noremap K 10k
-
 " Tab and Shift tab to indent and un-indent (Now I use tab for window
 " navigation)
 "nnoremap <Tab> >>
 "nnoremap <S-Tab> <<
+
+vnoremap > >gv
+vnoremap < <gv
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -266,11 +290,13 @@ vmap x "_d
 " remap * to stay at first match
 "nmap * *N 
 
-" use leader to interact with the system clipboard 
+" I think this just recreates * 's default functionality, but could be a good
+" template to edit for a future command
+"nnoremap <Leader>z /<C-r>=expand("<cword>")<CR><CR>
+
+" use leader to interact with the system clipboard {{{
 nnoremap <Leader>p "*]p
 nnoremap <Leader>P "*]P
-"nnoremap <Leader>v "*]p
-"nnoremap <Leader>V "*]P
 
 nnoremap <Leader>y ma^"*y$`a
 nnoremap <Leader>c ^"*c$
@@ -279,6 +305,8 @@ nnoremap <Leader>d ^"*d$
 vnoremap <Leader>y "*y
 vnoremap <Leader>c "*c
 vnoremap <Leader>d "*d
+
+" }}}
 
 " place whole file on the system clipboard (and return cursor to where it was)
 nmap <Leader>a maggVG"*y`a
@@ -301,17 +329,23 @@ cnoremap <C-E> <End>
 cnoremap <C-B> <Left>
 cnoremap <C-F> <Right>
 
-if !exists( "*BracesEndToken" )
-    function BracesEndToken()
-        let current_line = getline( '.' )
-        let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
+" }}}
 
-        if match(current_line, braces_at_end) >= 0
-            return "\<CR>}\<C-O>O"
-        else
-            return "\<CR>"
-        endif
-    endfunction
+"""""""""""""
+" Functions " {{{
+"""""""""""""
+
+if !exists( "*BracesEndToken" )
+  function BracesEndToken()
+    let current_line = getline( '.' )
+    let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
+
+    if match(current_line, braces_at_end) >= 0
+      return "\<CR>}\<C-O>O"
+    else
+      return "\<CR>"
+    endif
+  endfunction
 endif
 
 autocmd FileType javascript imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
@@ -338,3 +372,5 @@ endif
 
 " I think <S-Enter> only works in gvim (MacVim) for now
 "autocmd FileType ruby imap <buffer> <S-Enter> <C-R>=RubyEndToken()<CR>
+
+" }}}
