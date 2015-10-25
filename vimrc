@@ -205,8 +205,7 @@ set visualbell
 set foldenable
 set foldlevelstart=10
 set foldnestmax=10
-"set foldmethod=syntax
-set foldmethod=marker
+set foldmethod=syntax
 autocmd FileType vim setlocal foldmethod=marker
 
 " Some stuff everyone says you need
@@ -233,8 +232,8 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 """""""""""""""""""""""""""""""""
 
 " Quickly open a vertical split of my VIMRC and source my VIMRC
-nnoremap <silent> <leader>ev :vs $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <leader>ev :vs ~/.vimrc<CR>
+nnoremap <silent> <leader>sv :so ~/.vimrc<CR>
 
 " Enter gives a new line when in command mode without entering insert mode. Likewise, shift+enter gives a new line
 " above the cursor 
