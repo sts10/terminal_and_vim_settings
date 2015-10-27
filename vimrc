@@ -275,6 +275,7 @@ nnoremap D d$
 
 " X removes line without placing it in the default registry
 nmap X "_dd
+nnoremap x "_x
 
 " In visual mode, X removes selection without placing it in the default registry
 vmap X "_d
