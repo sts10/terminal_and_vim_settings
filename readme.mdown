@@ -25,7 +25,7 @@ My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Downloa
 
 ### Terminal Colors
 
-`sam_terminal_2015.terminal` can be imported as a profile in your Terminal application for OS X. Alternatively you could try importing `sam_2015_iterm.itermcolors` into Terminal or iTerm2 (as of November 2015 I'd recommend the Nightly version). As a last resort, examine the included screenshot to get my preferred Terminal colors. You could also just import some version of [Solarized Light Terminal profile](https://github.com/tomislav/osx-terminal.app-colors-solarized). 
+`sam_terminal_2015.terminal` can be imported as a profile in your Terminal application for OS X. Alternatively you could try importing `sam_2015_iterm.itermcolors` into Terminal or iTerm2 (as of November 2015 I'd recommend the [Nightly version](http://iterm2.com/downloads/nightly/#/section/home) so you can get [Neovim true color support](http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/)). As a last resort, examine the included screenshot to get my preferred Terminal colors. You could also just import some version of [Solarized Light Terminal profile](https://github.com/tomislav/osx-terminal.app-colors-solarized). 
 
 ### Sublime Text
 
