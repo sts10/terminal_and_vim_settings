@@ -21,14 +21,14 @@ If you need, here's a [helpful blog post](http://www.prioritized.net/blog/upgrad
 
 ### Coding Font
 
-My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download). [More on my setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/).
+My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download). [More on my colors/font setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/).
 
 ### Terminal Colors
 
-`sam_terminal_2015.terminal` can be imported as a profile in your Terminal application for OS X. Alternatively you could try imported `sam_2015_iterm.itermcolors` into Terminal or Iterm2. As a last resort, examine the screenshot to get my preferred Terminal colors. Can also just import some version of [Solarized Light Terminal profile](https://github.com/tomislav/osx-terminal.app-colors-solarized). 
+`sam_terminal_2015.terminal` can be imported as a profile in your Terminal application for OS X. Alternatively you could try importing `sam_2015_iterm.itermcolors` into Terminal or iTerm2 (as of November 2015 I'd recommend the Nightly version). As a last resort, examine the included screenshot to get my preferred Terminal colors. You could also just import some version of [Solarized Light Terminal profile](https://github.com/tomislav/osx-terminal.app-colors-solarized). 
 
 ### Sublime Text
 
-I've also included two files related to my [Sublime Text 2](http://www.sublimetext.com/2) setup (though most preferences will carry over to [Sublime Text 3](http://www.sublimetext.com/3)). The two files are my user_preferences and my keybindings. My preferred Sublime theme is [Mustard](http://colorsublime.com/theme/Mustard).
+I've also included two files related to my [Sublime Text 2](http://www.sublimetext.com/2) setup (though most preferences will carry over to [Sublime Text 3](http://www.sublimetext.com/3)). The two files are my user_preferences and my keybindings. My preferred Sublime theme is [Mustard](http://colorsublime.com/theme/Mustard). For spell check and other settings specific to Markdown files, you'll need to write those settings yourself in the appropriate file location.
 
 
