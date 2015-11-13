@@ -3,22 +3,22 @@
 
 " GUI color definitions
 let s:gui00 = "202020"
-" 01 and 02 were 666666
 let s:gui01 = "333333"
 let s:gui02 = "666666"
 let s:gui03 = "80a78c"
 let s:gui04 = "f7c527"
 let s:gui05 = "ffffff"
 let s:gui06 = "333333"
-let s:gui07 = "ffffff"
+let s:gui07 = "ecd795"
 let s:gui08 = "ec691e"
 let s:gui09 = "73e4f6"
-let s:gui0A = "ffffff"
+let s:gui0A = "ec691e"
 let s:gui0B = "a1d7f2"
 let s:gui0C = "73e4f6"
 let s:gui0D = "f7c527" 
 let s:gui0E = "ec691e"
-let s:gui0F = "f7c527"
+let s:gui0F = "ecd795"
+
 
 " Terminal color definitions
 
