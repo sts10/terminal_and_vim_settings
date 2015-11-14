@@ -9,15 +9,15 @@ let s:gui03 = "80a78c"
 let s:gui04 = "f7c527"
 let s:gui05 = "ffffff"
 let s:gui06 = "333333"
-let s:gui07 = "ecd795"
-let s:gui08 = "ec691e"
+let s:gui07 = "73e4f6"
+let s:gui08 = "ecd795"
 let s:gui09 = "73e4f6"
 let s:gui0A = "ec691e"
 let s:gui0B = "a1d7f2"
 let s:gui0C = "73e4f6"
 let s:gui0D = "f7c527" 
 let s:gui0E = "ec691e"
-let s:gui0F = "ecd795"
+let s:gui0F = "73e4f6"
 
 
 " Terminal color definitions
