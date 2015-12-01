@@ -16,8 +16,7 @@ Rename `bash_profile` to `.bash_profile` and place it into `~/`. If no `~/.bash_
 6. Installing MacVim: [Readme with link to latest MacVim snapshot](https://github.com/macvim-dev/macvim/releases/). Once installed, you're going to want to setup the command line `mvim` command by putting the `mvim` file in place by running `cp mvim /usr/local/bin/`. For help, here's a [helpful blog post](http://michaellee.co/launch-macvim-from-terminal/) and [my blog post on making the switch](http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/).
 7. Installing NeoVim: [Instructions for installing NeoVim with Homebrew](https://github.com/neovim/homebrew-neovim/blob/master/README.md) plus [my blog post on NeoVim](http://sts10.github.io/blog/2015/08/11/neovim-an-open-source-project/). Homebrew [lives here](http://brew.sh/). 
 To symlink your normal Vim configuration for NeoVim to use, run `ln -s ~/.vim ~/.config/nvim` and `ln -s ~/.vimrc ~/.config/nvim/init.vim` after installation.
-8. Installing the latest version of vim: If you already have RVM installed, first run `rvm use system`, then run `brew install vim`. You shouldn't need any special alias in your `bash_profile` to use this new version of vim.
-If you need, here's a [helpful blog post](http://www.prioritized.net/blog/upgrading-vim-on-os-x/) on how to update your command line Vim using Homebrew. (Hint: `which vim` tells you where your `vim` lives.)
+8. Installing the latest version of Vim: If you already have RVM installed, first run `rvm use system`, then run `brew install vim`. You shouldn't need any special alias in your `bash_profile` to use this new version of Vim. If that doesn't work smoothly, here's a [helpful blog post](http://www.prioritized.net/blog/upgrading-vim-on-os-x/) on how to update your command line Vim using Homebrew. (Hint: `which vim` tells you where your `vim` lives.)
 
 ### Coding Font
 
