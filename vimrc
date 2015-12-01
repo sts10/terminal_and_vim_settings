@@ -1,38 +1,32 @@
 set nocompatible
-" Vundle Settings {{{
-filetype off " temporarily turn this off so Vundle works correctly
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
 
-" plugin for a GitHub repo:
-Plugin 'kien/ctrlp.vim'
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'sickill/vim-pasta'
-Plugin 'justinmk/vim-sneak'
-Plugin 'tpope/vim-vinegar'
-Plugin 'ervandew/supertab'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-surround'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'junegunn/goyo.vim'
+" vim-plug (https://github.com/junegunn/vim-plug) settings {{{
+call plug#begin('~/.vim/plugged')
+Plug 'kien/ctrlp.vim'
+Plug 'terryma/vim-smooth-scroll'
+"Plug 'tpope/vim-unimpaired'
+Plug 'matze/vim-move'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sickill/vim-pasta'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-vinegar'
+Plug 'ervandew/supertab'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'bronson/vim-visual-star-search'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/goyo.vim'
+Plug 'tmhedberg/matchit'
+Plug 'rstacruz/vim-closer'
+
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
+call plug#end()
+" Some vim-plug commands:
+" :PlugInstall - Install plugins
+" :PlugUpdate  - Install or update plugins
+" :PlugUpgrade - Upgrade vim-plug itself
 " }}}
 
 " Set Leader {{{
@@ -54,10 +48,13 @@ vmap <C-l> <Leader>c<Space>gv
 imap <C-l> <ESC><Leader>c<Space>a
 
 " vim unimpaired mappings for moving lines (https://github.com/tpope/vim-unimpaired)
-nmap <C-k> [e
-nmap <C-j> ]e
-vmap <C-k> [egv
-vmap <C-j> ]egv
+"nmap <C-k> [e
+"nmap <C-j> ]e
+"vmap <C-k> [egv
+"vmap <C-j> ]egv
+
+" vim-move set to <C-k> and <C-j>
+let g:move_key_modifier = 'C'
 
 " Easier page navigation
 nnoremap <C-e> <C-u>
@@ -77,6 +74,7 @@ nmap <Space> <Plug>Sneak_s
 " Shift-Space is only detectable in gvim unfortunately. Can just use Sneak_s
 " and then page using , rather than ; but it's not quite the same.
 nmap <S-Space> <Plug>Sneak_S
+nmap S <Plug>Sneak_S
 
 " Sneak highlighting colors. See :h sneak or https://github.com/justinmk/vim-sneak/blob/master/doc/sneak.txt
 "hi link SneakPluginTarget ErrorMsg
@@ -102,8 +100,11 @@ nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 """"""""""""""""""""""""""""
 
 if has("nvim")
-  "set t_Co=256
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  tnoremap <ESC> <C-\><C-n><C-w><C-p>
+  "nnoremap <c-t> <c-w><c-p>:term<CR>
+  autocmd BufWinEnter,WinEnter term://* startinsert
+  autocmd BufLeave term://* stopinsert
 endif
 " }}}
 
@@ -133,8 +134,8 @@ set nu!
 " Keep the line number gutter narrow
 set numberwidth=2
 
-autocmd FileType markdown setlocal norelativenumber
-autocmd FileType markdown setlocal nonumber
+"autocmd FileType markdown setlocal norelativenumber
+"autocmd FileType markdown setlocal nonumber
 
 " Screen scrolls 3 lines in front of the cursor 
 set scrolloff=5
@@ -188,7 +189,7 @@ set smartindent
 set wildmenu
 " search characters as they're entered
 set incsearch
-" don't highlighet all search matches
+" don't highlight all search matches
 set nohlsearch
 
 " have vim re-load files when they're changed outside of vim
@@ -270,6 +271,19 @@ vnoremap <S-Tab> <gv
 " brackets, then dumps system clipboard contents into parenthesis
 autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 
+"autocmd FileType javascript nnoremap <Leader>; :s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
+  "function! ExpandJavascriptOneLiner()
+    "let line=getline(".")
+    "let r_one = substitute(line, ';', ";\r", 'ge')
+    "let r_two = substitute(r_one, '{', '{\r', 'ge')
+    "let r_three = substitute(r_two, '}', '}\r', 'ge')
+    "call setline(".", r_three)
+    "s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
+  "endfunction
+"endif
+
+"autocmd FileType javascript nnoremap <Leader>; :call ExpandJavasciptOneLiner()<CR>
+
 " D deletes to the end of the line, as it should
 nnoremap D d$
 
@@ -283,16 +297,6 @@ vmap x "_d
 
 " 0 is the 'yank register', and the ] formats it to indent you're pasting into. This command does all that with control + p (from http://vimcasts.org/episodes/meet-the-yank-register/)
 "nmap <c-p> "0]P
-
-" Make the * command a bit more like Sublime's Multiple Cursor
-"nmap * *viw<Esc>NNgn
-"vmap * <Esc>ngn
-" remap * to stay at first match
-"nmap * *N 
-
-" I think this just recreates * 's default functionality, but could be a good
-" template to edit for a future command
-"nnoremap <Leader>z /<C-r>=expand("<cword>")<CR><CR>
 
 " use leader to interact with the system clipboard {{{
 nnoremap <Leader>p "*]p
@@ -348,8 +352,8 @@ if !exists( "*BracesEndToken" )
   endfunction
 endif
 
-autocmd FileType javascript imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
-autocmd FileType css imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
+"autocmd FileType javascript imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
+"autocmd FileType css imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
 
 if !exists( "*RubyEndToken" )
   function RubyEndToken()
