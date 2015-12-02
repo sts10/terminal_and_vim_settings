@@ -247,13 +247,14 @@ nnoremap <silent> <leader>sv :so ~/.vimrc<CR>
 "nmap <CR> o<Esc>
 nmap <S-Enter> o<Esc>
 
-" j and k don't skip over wrapped lines in following FileTypes
-autocmd FileType html nnoremap j gj
-autocmd FileType html nnoremap k gk
-autocmd FileType markdown nnoremap j gj
-" autocmd FileType markdown ounmap j
-autocmd FileType markdown nnoremap k gk
-" autocmd FileType markdown ounmap k
+" j and k don't skip over wrapped lines in following FileTypes, unless given a
+" count (helpful since I display relative line numbers in these file types)
+" (https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o)
+autocmd FileType html nnoremap <expr> j v:count ? 'j' : 'gj'
+autocmd FileType html nnoremap <expr> k v:count ? 'k' : 'gk'
+autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
+autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
+
 
 " H to beginning of line, L to the end
 nnoremap H ^
