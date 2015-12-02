@@ -4,9 +4,9 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-smooth-scroll'
-"Plug 'tpope/vim-unimpaired'
 Plug 'matze/vim-move'
-Plug 'scrooloose/nerdcommenter'
+" Plug 'tpope/vim-unimpaired'
+Plug 'tomtom/tcomment_vim'
 Plug 'sickill/vim-pasta'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-vinegar'
@@ -43,9 +43,14 @@ nmap <Leader>s :split<CR><c-w>j<c-p>
 nmap <Leader>v :vsplit<CR><c-w>l<c-p>
 
 " map comment and uncomment from NERDCommenter (https://github.com/scrooloose/nerdcommenter)
-nmap <C-l> <Leader>c<Space>
-vmap <C-l> <Leader>c<Space>gv
-imap <C-l> <ESC><Leader>c<Space>a
+" nmap <C-l> <Leader>c<Space>
+" vmap <C-l> <Leader>c<Space>gv
+" imap <C-l> <ESC><Leader>c<Space>a
+
+" map control + l to tcomment toggle comment 
+nmap <C-l> gcc
+vmap <C-l> gcgv
+imap <C-l> <ESC>gcc
 
 " vim unimpaired mappings for moving lines (https://github.com/tpope/vim-unimpaired)
 "nmap <C-k> [e
@@ -208,6 +213,7 @@ set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=syntax
 autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType ruby setlocal foldmethod=marker
 
 " Some stuff everyone says you need
 filetype on
@@ -243,9 +249,11 @@ nmap <S-Enter> o<Esc>
 
 " j and k don't skip over wrapped lines in following FileTypes
 autocmd FileType html nnoremap j gj
-autocmd FileType markdown nnoremap j gj
 autocmd FileType html nnoremap k gk
+autocmd FileType markdown nnoremap j gj
+" autocmd FileType markdown ounmap j
 autocmd FileType markdown nnoremap k gk
+" autocmd FileType markdown ounmap k
 
 " H to beginning of line, L to the end
 nnoremap H ^
@@ -271,29 +279,33 @@ vnoremap <S-Tab> <gv
 " brackets, then dumps system clipboard contents into parenthesis
 autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 
-"autocmd FileType javascript nnoremap <Leader>; :s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
-  "function! ExpandJavascriptOneLiner()
-    "let line=getline(".")
-    "let r_one = substitute(line, ';', ";\r", 'ge')
-    "let r_two = substitute(r_one, '{', '{\r', 'ge')
-    "let r_three = substitute(r_two, '}', '}\r', 'ge')
-    "call setline(".", r_three)
-    "s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
-  "endfunction
-"endif
+" autocmd FileType javascript nnoremap K :s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
+" function! ExpandJavascriptOneLiner()
+"   let line=getline(".")
+"   let r_one = substitute(line, ';', ';\n', 'ge')
+"   let r_two = substitute(r_one, '{', "{\n", 'ge')
+"   let r_three = substitute(r_two, '}', '\r}\r', 'ge')
+"   call setline(".", r_three)
+"   " normal! mjggVG==`j
+"   " s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
+" endfunction
 
-"autocmd FileType javascript nnoremap <Leader>; :call ExpandJavasciptOneLiner()<CR>
+" autocmd FileType javascript nnoremap <Leader>t :call ExpandJavasciptOneLiner()<CR>
 
 " D deletes to the end of the line, as it should
 nnoremap D d$
 
-" X removes line without placing it in the default registry
-nmap X "_dd
+" have x (removes single character) not go into the default registry
 nnoremap x "_x
-
-" In visual mode, X removes selection without placing it in the default registry
+" Make X an operator that removes without placing text in the default registry
+nmap X "_d
+nmap XX "_dd
 vmap X "_d
 vmap x "_d
+
+" when changing text, don't put the replaced text into the default registry
+nnoremap c "_c
+vnoremap c "_c
 
 " 0 is the 'yank register', and the ] formats it to indent you're pasting into. This command does all that with control + p (from http://vimcasts.org/episodes/meet-the-yank-register/)
 "nmap <c-p> "0]P
