@@ -19,7 +19,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'rstacruz/vim-closer'
-
+Plug 'junegunn/seoul256.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -73,13 +73,10 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 
 " https://github.com/justinmk/vim-sneak
-" Map Sneak_s to <Space> only using nmap-- not nnoremap. That causes problems
-" apparently
-nmap <Space> <Plug>Sneak_s
-" Shift-Space is only detectable in gvim unfortunately. Can just use Sneak_s
-" and then page using , rather than ; but it's not quite the same.
-nmap <S-Space> <Plug>Sneak_S
-nmap S <Plug>Sneak_S
+" Map Sneak_s using nmap-- not nnoremap. Using nnoremap seems to cause problems
+nmap <Tab> <Plug>Sneak_s
+nmap <S-Tab> <Plug>Sneak_S
+" nmap S <Plug>Sneak_S
 
 " Sneak highlighting colors. See :h sneak or https://github.com/justinmk/vim-sneak/blob/master/doc/sneak.txt
 "hi link SneakPluginTarget ErrorMsg
@@ -328,11 +325,11 @@ vnoremap <Leader>d "*d
 " place whole file on the system clipboard (and return cursor to where it was)
 nmap <Leader>a maggVG"*y`a
 
-" tab for window management, plus some methods of expanding a window quickly
-nnoremap <Tab> <C-w>
-nnoremap <Tab><Tab> <C-w><C-w>
-nnoremap <Tab>t <C-w>5+
-nnoremap <Tab>f <C-w>5>
+" Use Space for window management, plus some methods of expanding a window quickly
+nnoremap <Space> <C-w>
+nnoremap <Space><Space> <C-w><C-w>
+nnoremap <Space>t <C-w>5+
+nnoremap <Space>f <C-w>5>
 "nnoremap <Space>T <C-w>5-
 "nnoremap <Space>F <C-w>5<
 
