@@ -2,7 +2,7 @@ set nocompatible
 
 " vim-plug (https://github.com/junegunn/vim-plug) settings {{{
 call plug#begin('~/.vim/plugged')
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'matze/vim-move'
 " Plug 'tpope/vim-unimpaired'
@@ -73,7 +73,8 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 
 " https://github.com/justinmk/vim-sneak
-" Map Sneak_s using nmap-- not nnoremap. Using nnoremap seems to cause problems
+" Map Sneak_s using nmap-- not nnoremap. That causes problems
+" apparently
 nmap <Tab> <Plug>Sneak_s
 nmap <S-Tab> <Plug>Sneak_S
 " nmap S <Plug>Sneak_S
@@ -325,7 +326,7 @@ vnoremap <Leader>d "*d
 " place whole file on the system clipboard (and return cursor to where it was)
 nmap <Leader>a maggVG"*y`a
 
-" Use Space for window management, plus some methods of expanding a window quickly
+" Space for window management, plus some methods of expanding a window quickly
 nnoremap <Space> <C-w>
 nnoremap <Space><Space> <C-w><C-w>
 nnoremap <Space>t <C-w>5+
