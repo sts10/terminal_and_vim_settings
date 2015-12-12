@@ -5,7 +5,7 @@ This is a snapshot of my terminal and Vim-related configuration files.
 ## To Use
 
 ### Bash Profile
-Rename `bash_profile` to `.bash_profile` and place it into `~/`. If no `~/.bash_profile` exists in your system yet, you can do this with `cp bash_profile ~/.bash_profile`. Restart your terminal for changes to take effect.
+Rename `bash_profile` to `.bash_profile` and place it into `~/`. If no `~/.bash_profile` exists in your system yet, you can do this with `curl -o ~/.bash_profile https://github.com/sts10/terminal_and_vim_settings/blob/master/bash_profile` or, from inside this cloned repo: `cp bash_profile ~/.bash_profile`. Restart your terminal for changes to take effect.
 
 ### Vim Setup
 Consider installing MacVim or Neovim before starting this section. See section below.
