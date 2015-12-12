@@ -1,17 +1,25 @@
 set nocompatible
 
 " vim-plug (https://github.com/junegunn/vim-plug) settings {{{
+" Automatically install vim-plug and run PlugInstall if vim-plug not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'matze/vim-move'
-" Plug 'tpope/vim-unimpaired'
 Plug 'tomtom/tcomment_vim'
 Plug 'sickill/vim-pasta'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-vinegar'
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
+Plug 'sts10/vim-mustard'
+Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
@@ -19,8 +27,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'rstacruz/vim-closer'
-Plug 'sts10/vim-mustard'
-Plug 'junegunn/seoul256.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
