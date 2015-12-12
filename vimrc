@@ -19,6 +19,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'rstacruz/vim-closer'
+Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
 
 " All of your Plugins must be added before the following line
