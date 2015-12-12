@@ -10,7 +10,7 @@ Rename `bash_profile` to `.bash_profile` and place it into `~/`. If no `~/.bash_
 ### Vim Setup
 Consider installing MacVim or Neovim before starting this section. See section below.
 
-1. Rename `vimrc` as `.vimrc` and place it in `~/`. If you're cool replacing any existing `~/.vimrc`, you can do this with `cp vimrc ~/.vimrc` from inside this repo's directory.
+1. Rename `vimrc` as `.vimrc` and place it in `~/`. If you're cool replacing any existing `~/.vimrc`, you can do this from the command line by running `curl -o ~/.vimrc https://github.com/sts10/terminal_and_vim_settings/blob/master/vimrc`, or cloning this directory and running `cp vimrc ~/.vimrc` from inside this repo's directory.
 2. `mkdir` the following directories: `~/.vim`, `~/.vim/backup`, `~/.vim/swap`, `~/.vim/undo`
 3. We'll now install [vim-plug](https://github.com/junegunn/vim-plug) and our plugins. This should happen automatically when you load vim for the first time. If that fails, visit [the vim-plug readme](https://github.com/junegunn/vim-plug) for installation instructions, then run `:PlugInstall` in a Vim buffer. 
 4. `mustard.vim` is a Vim colorscheme I made to mirror my preferred [Sublime Text](http://www.sublimetext.com/) theme, [Mustard](http://colorsublime.com/theme/Mustard). I have [sts10/vim-mustard.vim](https://github.com/sts10/vim-mustard) listed as a plugin in this `vimrc`, so the colorscheme should install when you run `:PlugInstall`. But if it doesn't, place `mustard.vim` into `~/.vim/colors/` (which you may have to `mkdir` yourself). Then either run `:colorscheme mustard` and then `set background=dark` or put those two commands into your `.vimrc` (they're already in the `vimrc` file in this repo).
