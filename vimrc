@@ -3,9 +3,9 @@ set nocompatible
 " vim-plug (https://github.com/junegunn/vim-plug) settings {{{
 " Automatically install vim-plug and run PlugInstall if vim-plug not found
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+  \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -18,6 +18,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-vinegar'
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-markdown'
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-surround'
@@ -84,6 +85,8 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 " apparently
 nmap <Tab> <Plug>Sneak_s
 nmap <S-Tab> <Plug>Sneak_S
+vmap <Tab> <Plug>Sneak_s
+vmap <S-Tab> <Plug>Sneak_S
 " nmap S <Plug>Sneak_S
 
 " Sneak highlighting colors. See :h sneak or https://github.com/justinmk/vim-sneak/blob/master/doc/sneak.txt
@@ -102,6 +105,9 @@ endfunction
 
 " Markdown to HTML 
 nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
+
+" vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
+let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh']
 
 " }}}
 
@@ -132,10 +138,8 @@ syntax on
 
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
-" for color scheme
 colorscheme mustard
 set background=dark
-
 
 " Display relative line numbers
 set relativenumber
@@ -150,14 +154,18 @@ set numberwidth=2
 " Screen scrolls 3 lines in front of the cursor 
 set scrolloff=5
 
-" by default don't wrap lines
-set nowrap 
-
 " show two status lines
 set laststatus=2
 
 " if no filetype specified, set ft=markdown (alternative would be text)
 autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
+
+" Be sure to detect *.md files as markdown, rather than Modula-2
+" via https://github.com/tpope/vim-markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" By default don't wrap lines
+set nowrap 
 
 " But do wrap on these types of files...
 autocmd FileType markdown setlocal wrap
@@ -174,7 +182,6 @@ set linebreak
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
-
 
 " show command as you type them
 set sc
@@ -220,7 +227,7 @@ set foldmethod=syntax
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType ruby setlocal foldmethod=marker
 
-" Some stuff everyone says you need
+" turn on filetype detection
 filetype on
 filetype plugin on
 filetype indent on
@@ -260,7 +267,6 @@ autocmd FileType html nnoremap <expr> k v:count ? 'k' : 'gk'
 autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
 
-
 " H to beginning of line, L to the end
 nnoremap H ^
 nnoremap L $
@@ -270,16 +276,22 @@ nnoremap L $
 "inoremap <c-a> <Esc>I
 "inoremap <c-e> <Esc>A
 
+" Have the indent commands re-highlight the last visual selection to make
+" multiple indentations easier
+vnoremap > >gv
+vnoremap < <gv
+
 " Tab and Shift tab to indent and un-indent (Now I use tab for window
 " navigation)
 "nnoremap <Tab> >>
 "nnoremap <S-Tab> <<
 
-vnoremap > >gv
-vnoremap < <gv
+" vnoremap <Tab> >gv
+" vnoremap <S-Tab> <gv
 
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
+" Make the dot command work as expected in visual mode (via
+" https://www.reddit.com/r/vim/comments/3y2mgt/do_you_have_any_minor_customizationsmappings_that/cya0x04)
+vnoremap . :norm.<CR>
 
 " In markdown files, Control + a surrounds highlighted text with square
 " brackets, then dumps system clipboard contents into parenthesis
@@ -340,10 +352,6 @@ nnoremap <Space>t <C-w>5+
 nnoremap <Space>f <C-w>5>
 "nnoremap <Space>T <C-w>5-
 "nnoremap <Space>F <C-w>5<
-
-"map <Leader>t for tab navigation
-nmap <Leader>t gt
-nmap <Leader>T gT
 
 " Allow some of the emacs motions on the vim command line.
 cnoremap <C-A> <Home>
