@@ -27,7 +27,8 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
-Plug 'rstacruz/vim-closer'
+" Plug 'rstacruz/vim-closer'
+Plug 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -107,7 +108,7 @@ endfunction
 nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
-let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh']
+let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json']
 
 " }}}
 
