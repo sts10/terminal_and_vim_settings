@@ -1,4 +1,4 @@
-set nocompatible
+
 
 " vim-plug (https://github.com/junegunn/vim-plug) settings {{{
 " Automatically install vim-plug and run PlugInstall if vim-plug not found
@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'matze/vim-move'
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 Plug 'sickill/vim-pasta'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-vinegar'
@@ -27,8 +27,10 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
-" Plug 'rstacruz/vim-closer'
 Plug 'jiangmiao/auto-pairs'
+" Plug 'rstacruz/vim-closer'
+Plug 'duff/vim-scratch'
+Plug 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -39,7 +41,7 @@ call plug#end()
 " }}}
 
 " Set Leader {{{
-let mapleader = "'"
+let mapleader = "\<Space>"
 " }}}
 
 """""""""""""""""""""""""""""""
@@ -56,7 +58,8 @@ nmap <Leader>v :vsplit<CR><c-w>l<c-p>
 " vmap <C-l> <Leader>c<Space>gv
 " imap <C-l> <ESC><Leader>c<Space>a
 
-" map control + l to tcomment toggle comment 
+" map control + l to commentary toggle comment for one line or visual
+" selection
 nmap <C-l> gcc
 vmap <C-l> gcgv
 imap <C-l> <ESC>gcc
@@ -91,8 +94,8 @@ vmap <S-Tab> <Plug>Sneak_S
 " nmap S <Plug>Sneak_S
 
 " Sneak highlighting colors. See :h sneak or https://github.com/justinmk/vim-sneak/blob/master/doc/sneak.txt
-"hi link SneakPluginTarget ErrorMsg
-"hi link SneakPluginScope  Comment
+" hi link SneakPluginTarget ErrorMsg
+" hi link SneakPluginScope  Comment
 
 " Goyo (distraction-free)
 let g:goyo_width="80%"
@@ -103,6 +106,10 @@ endfunction
 function! s:goyo_leave()
   set scrolloff=5
 endfunction
+
+" auto-pairs
+" Re-set pariings so it doesn't do anything with single or double quotes
+let g:AutoPairs = {'(':')', '[':']', '{':'}', '`':'`'}
 
 " Markdown to HTML 
 nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
@@ -347,8 +354,12 @@ vnoremap <Leader>d "*d
 nmap <Leader>a maggVG"*y`a
 
 " Space for window management, plus some methods of expanding a window quickly
-nnoremap <Space> <C-w>
-nnoremap <Space><Space> <C-w><C-w>
+nnoremap <Leader><Leader> <C-w><C-w>
+" nnoremap <Space> <C-w>
+nnoremap <Right> <C-w>l
+nnoremap <Left> <C-w>h
+nnoremap <Up> <C-w>k
+nnoremap <Down> <C-w>j
 nnoremap <Space>t <C-w>5+
 nnoremap <Space>f <C-w>5>
 "nnoremap <Space>T <C-w>5-
