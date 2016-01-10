@@ -203,6 +203,11 @@ function extract () {
     #. `brew --prefix`/etc/bash_completion
   #fi
 
+  # source bashrc
+  if [ -f ~/.bashrc ]; then
+     source ~/.bashrc
+  fi
+
   # RVM
   # Mandatory loading of RVM into the shell
   # This must be the last line of your bash_profile always
