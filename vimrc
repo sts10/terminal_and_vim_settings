@@ -21,6 +21,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-markdown'
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
@@ -29,8 +30,10 @@ Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'rstacruz/vim-closer'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'duff/vim-scratch'
 Plug 'mhinz/vim-startify'
+
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -53,22 +56,11 @@ let g:ctrlp_map = '<c-p>'
 nmap <Leader>s :split<CR><c-w>j<c-p>
 nmap <Leader>v :vsplit<CR><c-w>l<c-p>
 
-" map comment and uncomment from NERDCommenter (https://github.com/scrooloose/nerdcommenter)
-" nmap <C-l> <Leader>c<Space>
-" vmap <C-l> <Leader>c<Space>gv
-" imap <C-l> <ESC><Leader>c<Space>a
-
 " map control + l to commentary toggle comment for one line or visual
 " selection
 nmap <C-l> gcc
 vmap <C-l> gcgv
 imap <C-l> <ESC>gcc
-
-" vim unimpaired mappings for moving lines (https://github.com/tpope/vim-unimpaired)
-"nmap <C-k> [e
-"nmap <C-j> ]e
-"vmap <C-k> [egv
-"vmap <C-j> ]egv
 
 " vim-move set to <C-k> and <C-j>
 let g:move_key_modifier = 'C'
@@ -93,10 +85,6 @@ vmap <Tab> <Plug>Sneak_s
 vmap <S-Tab> <Plug>Sneak_S
 " nmap S <Plug>Sneak_S
 
-" Sneak highlighting colors. See :h sneak or https://github.com/justinmk/vim-sneak/blob/master/doc/sneak.txt
-" hi link SneakPluginTarget ErrorMsg
-" hi link SneakPluginScope  Comment
-
 " Goyo (distraction-free)
 let g:goyo_width="80%"
 nmap <Leader>g :Goyo<CR>
@@ -108,7 +96,7 @@ function! s:goyo_leave()
 endfunction
 
 " auto-pairs
-" Re-set pariings so it doesn't do anything with single or double quotes
+" Re-set pairings so it doesn't do anything with single or double quotes
 let g:AutoPairs = {'(':')', '[':']', '{':'}', '`':'`'}
 
 " Markdown to HTML 
@@ -124,8 +112,12 @@ let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python'
 """"""""""""""""""""""""""""
 
 if has("nvim")
+  " pretty colors
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  tnoremap <ESC> <C-\><C-n><C-w><C-p>
+
+  " terminal mode remappings
+  tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
+  tnoremap <Esc><Esc> <C-\><C-n>:q<CR>
   "nnoremap <c-t> <c-w><c-p>:term<CR>
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
@@ -152,14 +144,15 @@ set background=dark
 " Display relative line numbers
 set relativenumber
 " display the absolute line number at the line you're on
-set nu!
+" set nu!
+set number
 " Keep the line number gutter narrow
 set numberwidth=2
 
 "autocmd FileType markdown setlocal norelativenumber
 "autocmd FileType markdown setlocal nonumber
 
-" Screen scrolls 3 lines in front of the cursor 
+" Screen scrolls 5 lines in front of the cursor 
 set scrolloff=5
 
 " show two status lines
@@ -193,6 +186,9 @@ set undodir=~/.vim/undo//
 
 " show command as you type them
 set sc
+
+" remember 1000 commands into history
+set history=1000
 
 " specify backspace to work as you'd expect (http://vim.wikia.com/wiki/Backspace_and_delete_problems)
 set backspace=2
@@ -275,27 +271,21 @@ autocmd FileType html nnoremap <expr> k v:count ? 'k' : 'gk'
 autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
 
+" l to visually select current line
+vmap li <Esc>^v$h
+vmap la <Esc>^v$
+
+" remap auto-complete line
+inoremap <C-f> <C-x><C-l>
+
 " H to beginning of line, L to the end
 nnoremap H ^
 nnoremap L $
-
-"noremap <c-a> ^
-"noremap <c-e> $
-"inoremap <c-a> <Esc>I
-"inoremap <c-e> <Esc>A
 
 " Have the indent commands re-highlight the last visual selection to make
 " multiple indentations easier
 vnoremap > >gv
 vnoremap < <gv
-
-" Tab and Shift tab to indent and un-indent (Now I use tab for window
-" navigation)
-"nnoremap <Tab> >>
-"nnoremap <S-Tab> <<
-
-" vnoremap <Tab> >gv
-" vnoremap <S-Tab> <gv
 
 " Make the dot command work as expected in visual mode (via
 " https://www.reddit.com/r/vim/comments/3y2mgt/do_you_have_any_minor_customizationsmappings_that/cya0x04)
@@ -304,19 +294,6 @@ vnoremap . :norm.<CR>
 " In markdown files, Control + a surrounds highlighted text with square
 " brackets, then dumps system clipboard contents into parenthesis
 autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
-
-" autocmd FileType javascript nnoremap K :s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
-" function! ExpandJavascriptOneLiner()
-"   let line=getline(".")
-"   let r_one = substitute(line, ';', ';\n', 'ge')
-"   let r_two = substitute(r_one, '{', "{\n", 'ge')
-"   let r_three = substitute(r_two, '}', '\r}\r', 'ge')
-"   call setline(".", r_three)
-"   " normal! mjggVG==`j
-"   " s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
-" endfunction
-
-" autocmd FileType javascript nnoremap <Leader>t :call ExpandJavasciptOneLiner()<CR>
 
 " D deletes to the end of the line, as it should
 nnoremap D d$
@@ -362,8 +339,6 @@ nnoremap <Up> <C-w>k
 nnoremap <Down> <C-w>j
 nnoremap <Space>t <C-w>5+
 nnoremap <Space>f <C-w>5>
-"nnoremap <Space>T <C-w>5-
-"nnoremap <Space>F <C-w>5<
 
 " Allow some of the emacs motions on the vim command line.
 cnoremap <C-A> <Home>
@@ -373,46 +348,3 @@ cnoremap <C-F> <Right>
 
 " }}}
 
-"""""""""""""
-" Functions " {{{
-"""""""""""""
-
-if !exists( "*BracesEndToken" )
-  function BracesEndToken()
-    let current_line = getline( '.' )
-    let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
-
-    if match(current_line, braces_at_end) >= 0
-      return "\<CR>}\<C-O>O"
-    else
-      return "\<CR>"
-    endif
-  endfunction
-endif
-
-"autocmd FileType javascript imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
-"autocmd FileType css imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
-
-if !exists( "*RubyEndToken" )
-  function RubyEndToken()
-    let current_line = getline( '.' )
-    let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
-    let stuff_without_do = '^\s*\(class\|if\|unless\|begin\|case\|for\|module\|while\|until\|def\)'
-    let with_do = 'do\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
-
-    if match(current_line, braces_at_end) >= 0
-      return "\<CR>}\<C-O>O"
-    elseif match(current_line, stuff_without_do) >= 0
-      return "\<CR>end\<C-O>O"
-    elseif match(current_line, with_do) >= 0
-      return "\<CR>end\<C-O>O"
-    else
-      return "\<CR>"
-    endif
-  endfunction
-endif
-
-" I think <S-Enter> only works in gvim (MacVim) for now
-"autocmd FileType ruby imap <buffer> <S-Enter> <C-R>=RubyEndToken()<CR>
-
-" }}}
