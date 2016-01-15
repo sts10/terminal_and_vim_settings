@@ -1,0 +1,115 @@
+
+" map comment and uncomment from NERDCommenter (https://github.com/scrooloose/nerdcommenter)
+" nmap <C-l> <Leader>c<Space>
+" vmap <C-l> <Leader>c<Space>gv
+" imap <C-l> <ESC><Leader>c<Space>a
+
+" vim unimpaired mappings for moving lines (https://github.com/tpope/vim-unimpaired)
+"nmap <C-k> [e
+"nmap <C-j> ]e
+"vmap <C-k> [egv
+"vmap <C-j> ]egv
+
+" Sneak highlighting colors. See :h sneak or https://github.com/justinmk/vim-sneak/blob/master/doc/sneak.txt
+" hi link SneakPluginTarget ErrorMsg
+" hi link SneakPluginScope  Comment
+
+"noremap <c-a> ^
+"noremap <c-e> $
+"inoremap <c-a> <Esc>I
+"inoremap <c-e> <Esc>A
+
+
+" Tab and Shift tab to indent and un-indent (Now I use tab for window
+" navigation)
+"nnoremap <Tab> >>
+"nnoremap <S-Tab> <<
+
+" vnoremap <Tab> >gv
+" vnoremap <S-Tab> <gv
+
+
+" Not working Javascript Expander
+" autocmd FileType javascript nnoremap K :s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
+" function! ExpandJavascriptOneLiner()
+"   let line=getline(".")
+"   let r_one = substitute(line, ';', ';\n', 'ge')
+"   let r_two = substitute(r_one, '{', "{\n", 'ge')
+"   let r_three = substitute(r_two, '}', '\r}\r', 'ge')
+"   call setline(".", r_three)
+"   " normal! mjggVG==`j
+"   " s/; /;/ge | %s/;/;\r/ge | %s/} /}/ge | %s/{ /{/ge | %s/}/}\r/ge | %s/{/{\r/ge | normal mbggVG==`b
+" endfunction
+
+" autocmd FileType javascript nnoremap <Leader>t :call ExpandJavasciptOneLiner()<CR>
+"
+
+" FZF stuff
+" " vim-plug setup: 
+
+if has("nvim")
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+endif
+
+" " remappings, with ctrl-p Fall back
+" if executable('FZF')
+" if has("nvim")
+  " nnoremap <c-p> :FZF<CR>
+  " nnoremap <Leader>s :split<CR><c-w>j:FZF<CR>
+  " nnoremap <Leader>v :vsplit<CR><c-w>l:FZF<CR>
+
+  " inoremap <C-f> <plug>(fzf-complete-line)
+" else
+  " Ctrl- P mapping and two custom split keymappings (https://github.com/kien/ctrlp.vim)
+  let g:ctrlp_map = '<c-p>'
+  nmap <Leader>s :split<CR><c-w>j<c-p>
+  nmap <Leader>v :vsplit<CR><c-w>l<c-p>
+" endif
+
+
+
+
+"""""""""""""
+" Functions " {{{
+"""""""""""""
+
+if !exists( "*BracesEndToken" )
+  function BracesEndToken()
+    let current_line = getline( '.' )
+    let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
+
+    if match(current_line, braces_at_end) >= 0
+      return "\<CR>}\<C-O>O"
+    else
+      return "\<CR>"
+    endif
+  endfunction
+endif
+
+"autocmd FileType javascript imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
+"autocmd FileType css imap <buffer> <CR> <C-R>=BracesEndToken()<CR>
+
+if !exists( "*RubyEndToken" )
+  function RubyEndToken()
+    let current_line = getline( '.' )
+    let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
+    let stuff_without_do = '^\s*\(class\|if\|unless\|begin\|case\|for\|module\|while\|until\|def\)'
+    let with_do = 'do\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
+
+    if match(current_line, braces_at_end) >= 0
+      return "\<CR>}\<C-O>O"
+    elseif match(current_line, stuff_without_do) >= 0
+      return "\<CR>end\<C-O>O"
+    elseif match(current_line, with_do) >= 0
+      return "\<CR>end\<C-O>O"
+    else
+      return "\<CR>"
+    endif
+  endfunction
+endif
+
+" I think <S-Enter> only works in gvim (MacVim) for now
+"autocmd FileType ruby imap <buffer> <S-Enter> <C-R>=RubyEndToken()<CR>
+
+" }}}
