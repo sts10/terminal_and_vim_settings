@@ -18,6 +18,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-vinegar'
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-markdown'
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
@@ -33,7 +34,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'duff/vim-scratch'
 Plug 'mhinz/vim-startify'
-
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -121,6 +121,9 @@ if has("nvim")
   "nnoremap <c-t> <c-w><c-p>:term<CR>
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
+
+  " for fzf
+  " imap <C-f> <plug>(fzf-complete-line)
 endif
 " }}}
 
@@ -255,8 +258,8 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 """""""""""""""""""""""""""""""""
 
 " Quickly open a vertical split of my VIMRC and source my VIMRC
-nnoremap <silent> <leader>ev :vs ~/.vimrc<CR>
-nnoremap <silent> <leader>sv :so ~/.vimrc<CR>
+nnoremap <silent> <leader>ev :vs $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Enter gives a new line when in command mode without entering insert mode. Likewise, shift+enter gives a new line
 " above the cursor 
