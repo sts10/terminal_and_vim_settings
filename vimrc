@@ -29,10 +29,10 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 " Plug 'rstacruz/vim-closer'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'duff/vim-scratch'
+" Plug 'duff/vim-scratch'
 Plug 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
