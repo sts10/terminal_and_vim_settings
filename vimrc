@@ -29,11 +29,12 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'mhinz/vim-startify'
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'rstacruz/vim-closer'
-Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'duff/vim-scratch'
-Plug 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -53,8 +54,8 @@ let mapleader = "\<Space>"
 
 " Ctrl- P mapping and two custom split keymappings (https://github.com/kien/ctrlp.vim)
 let g:ctrlp_map = '<c-p>'
-nmap <Leader>s :split<CR><c-w>j<c-p>
-nmap <Leader>v :vsplit<CR><c-w>l<c-p>
+nnoremap <Leader>s :split<CR><c-w>j<c-p>
+nnoremap <Leader>v :vsplit<CR><c-w>l<c-p>
 
 " map control + l to commentary toggle comment for one line or visual
 " selection
@@ -87,7 +88,7 @@ vmap <S-Tab> <Plug>Sneak_S
 
 " Goyo (distraction-free)
 let g:goyo_width="80%"
-nmap <Leader>g :Goyo<CR>
+nnoremap <Leader>g :Goyo<CR>
 function! s:goyo_enter()
   set scrolloff=999
 endfunction
@@ -230,7 +231,7 @@ set visualbell
 set foldenable
 set foldlevelstart=10
 set foldnestmax=10
-set foldmethod=syntax
+set foldmethod=marker
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType ruby setlocal foldmethod=marker
 
@@ -258,13 +259,13 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 """""""""""""""""""""""""""""""""
 
 " Quickly open a vertical split of my VIMRC and source my VIMRC
-nnoremap <silent> <leader>ev :vs $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <leader>ev :vs ~/.vimrc<CR>
+nnoremap <silent> <leader>sv :so ~/.vimrc<CR>
 
 " Enter gives a new line when in command mode without entering insert mode. Likewise, shift+enter gives a new line
 " above the cursor 
 "nmap <CR> o<Esc>
-nmap <S-Enter> o<Esc>
+nnoremap <S-Enter> o<Esc>
 
 " j and k don't skip over wrapped lines in following FileTypes, unless given a
 " count (helpful since I display relative line numbers in these file types)
@@ -294,12 +295,22 @@ vnoremap < <gv
 " https://www.reddit.com/r/vim/comments/3y2mgt/do_you_have_any_minor_customizationsmappings_that/cya0x04)
 vnoremap . :norm.<CR>
 
+" allows you to visually select a section and then hit @ to run a macro on all lines
+" https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db#.3dcn9prw6
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
 " In markdown files, Control + a surrounds highlighted text with square
 " brackets, then dumps system clipboard contents into parenthesis
 autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 
-" D deletes to the end of the line, as it should
+" D deletes to the end of the line, and Y yanks to end of line
 nnoremap D d$
+nnoremap Y y$
 
 " have x (removes single character) not go into the default registry
 nnoremap x "_x
@@ -333,7 +344,7 @@ vnoremap <Leader>d "*d
 " place whole file on the system clipboard (and return cursor to where it was)
 nmap <Leader>a maggVG"*y`a
 
-" Space for window management, plus some methods of expanding a window quickly
+" Window management, plus some methods of expanding a window quickly
 nnoremap <Leader><Leader> <C-w><C-w>
 " nnoremap <Space> <C-w>
 nnoremap <Right> <C-w>l
