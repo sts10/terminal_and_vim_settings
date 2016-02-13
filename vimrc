@@ -276,8 +276,8 @@ autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " l to visually select current line
-vmap li <Esc>^v$h
-vmap la <Esc>^v$
+vnoremap il <Esc>^v$h
+vnoremap al <Esc>^v$
 
 " remap auto-complete line
 inoremap <C-f> <C-x><C-l>
