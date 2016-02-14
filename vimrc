@@ -19,6 +19,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-markdown'
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
@@ -362,3 +363,17 @@ cnoremap <C-F> <Right>
 
 " }}}
 
+" Simple re-format for minified Javascript
+" command! UnMinify call UnMinify()
+function! UnMinify()
+    normal mj
+    %s/{\ze[^\r\n]/{\r/ge
+    " %s/){/) {/ge
+    %s/};\?\ze[^\r\n]/\0\r/ge
+    %s/;\ze[^\r\n]/;\r/ge
+    " %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /ge
+    normal ggVG=`j
+endfunction
+
+autocmd FileType javascript nnoremap <Leader>j :call UnMinify()<CR>
+autocmd FileType javascript nnoremap <Leader>k mjggvGJ<Esc>`j
