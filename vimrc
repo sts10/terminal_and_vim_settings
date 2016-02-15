@@ -176,7 +176,6 @@ set nowrap
 " But do wrap on these types of files...
 autocmd FileType markdown setlocal wrap
 autocmd FileType html setlocal wrap
-autocmd FileType css setlocal wrap
 autocmd FileType text setlocal wrap
 
 " And when Vim down wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
@@ -275,6 +274,8 @@ autocmd FileType html nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType html nnoremap <expr> k v:count ? 'k' : 'gk'
 autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
+autocmd FileType text nnoremap <expr> j v:count ? 'j' : 'gj'
+autocmd FileType text nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " l to visually select current line
 vnoremap il <Esc>^v$h
