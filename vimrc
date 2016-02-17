@@ -33,6 +33,11 @@ Plug 'tmhedberg/matchit'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-startify'
+Plug 'kana/vim-textobj-user'
+Plug 'lucapette/vim-textobj-underscore'
+Plug 'jceb/vim-textobj-uri'
+Plug 'kana/vim-textobj-indent'
+Plug 'alvan/vim-closetag'
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'rstacruz/vim-closer'
 " Plug 'duff/vim-scratch'
@@ -106,6 +111,9 @@ nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json']
+
+" teach jceb/vim-textobj-uri how to handle markdown URIs
+URIPositioningPatternAdd \[[^]]*\](\zs[^)]\+) markdown
 
 " }}}
 
