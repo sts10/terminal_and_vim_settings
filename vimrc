@@ -114,8 +114,12 @@ autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4t
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json']
 
 " teach jceb/vim-textobj-uri how to handle markdown URIs
-" URIPositioningPatternAdd \[[^]]*\](\zs[^)]\+) markdown
 autocmd FileType markdown call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)')
+
+" mapm gx and go to visually select a URI and then open it in default browser
+" see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
+nmap gx mxviugx<Esc>`x
+nmap go mxviugx<Esc>`x
 
 " }}}
 
@@ -176,6 +180,9 @@ set laststatus=2
 " if no filetype specified, set ft=markdown (alternative would be text)
 autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
 
+" if file name is `.gitignore`, be sure to set filetype to text
+autocmd BufNewFile,BufReadPost .gitignore set filetype=text
+
 " Be sure to detect *.md files as markdown, rather than Modula-2
 " via https://github.com/tpope/vim-markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -184,11 +191,11 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 set nowrap 
 
 " But do wrap on these types of files...
-autocmd FileType markdown setlocal wrap
-autocmd FileType html setlocal wrap
 autocmd FileType text setlocal wrap
+autocmd FileType html setlocal wrap
+autocmd FileType markdown setlocal wrap
 
-" And when Vim down wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
+" And when Vim does wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
 set linebreak
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
