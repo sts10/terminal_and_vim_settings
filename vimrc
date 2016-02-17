@@ -33,11 +33,12 @@ Plug 'tmhedberg/matchit'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-startify'
+Plug 'alvan/vim-closetag'
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore'
 Plug 'jceb/vim-textobj-uri'
 Plug 'kana/vim-textobj-indent'
-Plug 'alvan/vim-closetag'
+Plug 'kana/vim-textobj-line'
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'rstacruz/vim-closer'
 " Plug 'duff/vim-scratch'
@@ -107,13 +108,14 @@ endfunction
 let g:AutoPairs = {'(':')', '[':']', '{':'}', '`':'`'}
 
 " Markdown to HTML 
-nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
+autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json']
 
 " teach jceb/vim-textobj-uri how to handle markdown URIs
-URIPositioningPatternAdd \[[^]]*\](\zs[^)]\+) markdown
+" URIPositioningPatternAdd \[[^]]*\](\zs[^)]\+) markdown
+autocmd FileType markdown call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)')
 
 " }}}
 
@@ -284,10 +286,6 @@ autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
 autocmd FileType text nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType text nnoremap <expr> k v:count ? 'k' : 'gk'
-
-" l to visually select current line
-vnoremap il <Esc>^v$h
-vnoremap al <Esc>^v$
 
 " remap auto-complete line
 inoremap <C-f> <C-x><C-l>
