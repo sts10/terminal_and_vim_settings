@@ -115,7 +115,7 @@ let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python'
 
 " teach jceb/vim-textobj-uri how to handle markdown URIs
 " autocmd FileType markdown call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)')
-call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)', 'markdown')
+" call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)', 'markdown')
 " call textobj#uri#add_positioning_pattern('', textobj_uri_positioning_patterns_markdown, 'markdown')
 
 " mapm gx and go to visually select a URI and then open it in default browser
