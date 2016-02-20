@@ -35,10 +35,10 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
 Plug 'kana/vim-textobj-user'
-Plug 'lucapette/vim-textobj-underscore'
-Plug 'jceb/vim-textobj-uri'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-line'
+Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
+Plug 'jceb/vim-textobj-uri' | Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent' | Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line' | Plug 'kana/vim-textobj-user'
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'rstacruz/vim-closer'
 " Plug 'duff/vim-scratch'
@@ -114,12 +114,14 @@ autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4t
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json']
 
 " teach jceb/vim-textobj-uri how to handle markdown URIs
-autocmd FileType markdown call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)')
+" autocmd FileType markdown call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)')
+call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)', 'markdown')
+" call textobj#uri#add_positioning_pattern('', textobj_uri_positioning_patterns_markdown, 'markdown')
 
 " mapm gx and go to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
 nmap gx mxviugx<Esc>`x
-nmap go mxviugx<Esc>`x
+" nmap go mxviugx<Esc>`x
 
 " }}}
 
