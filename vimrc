@@ -157,8 +157,6 @@ endif
 syntax on
 " start highlighting from 256 lines backwards
 syntax sync minlines=256 
-" do not syntax highlight very long lines
-set synmaxcol=300        
 
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
