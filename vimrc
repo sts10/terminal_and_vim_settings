@@ -178,6 +178,7 @@ set numberwidth=2
 
 " Screen scrolls 5 lines in front of the cursor 
 set scrolloff=5
+set sidescrolloff=5
 
 " show two status lines
 set laststatus=2
@@ -257,6 +258,9 @@ set visualbell
 filetype on
 filetype plugin on
 filetype indent on
+
+" Delete comment character when joining commented lines
+set formatoptions+=j
 
 " folding
 set foldenable
