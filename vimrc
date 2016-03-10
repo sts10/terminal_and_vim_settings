@@ -39,6 +39,7 @@ Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
 Plug 'jceb/vim-textobj-uri'             | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'          | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
+Plug 'wellle/targets.vim'
 " Plug 'duff/vim-scratch'
 
 " All of your Plugins must be added before the following line
@@ -154,6 +155,10 @@ endif
 
 " Turn syntax highlighting on 
 syntax on
+" start highlighting from 256 lines backwards
+syntax sync minlines=256 
+" do not syntax highlight very long lines
+set synmaxcol=300        
 
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
@@ -205,10 +210,14 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
-" show command as you type them
+" show commands as you type them
 set sc
 
-" remember 1000 commands into history
+" make vim a little speedier
+set lazyredraw
+set ttyfast
+
+" remember 1000 commands of your history
 set history=1000
 
 " specify backspace to work as you'd expect (http://vim.wikia.com/wiki/Backspace_and_delete_problems)
@@ -244,6 +253,11 @@ set smartcase
 " turn off error bells/sounds
 set visualbell
 
+" turn on filetype detection
+filetype on
+filetype plugin on
+filetype indent on
+
 " folding
 set foldenable
 set foldlevelstart=10
@@ -251,11 +265,6 @@ set foldnestmax=10
 set foldmethod=marker
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType ruby setlocal foldmethod=marker
-
-" turn on filetype detection
-filetype on
-filetype plugin on
-filetype indent on
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
