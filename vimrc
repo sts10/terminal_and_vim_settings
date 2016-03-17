@@ -270,9 +270,29 @@ autocmd FileType vim setlocal foldmethod=marker
 " nmap <BS> zfiik
 " nmap <Bslash> viizo
 
+function! NextClosedFold(dir)
+  if (foldclosed(line('.')) > 0)
+    " normal zo
+  else
+    let cmd = 'norm!z' . a:dir
+    let view = winsaveview()
+    let [l0, l, openf] = [0, view.lnum, 1]
+    while l != l0 && openf
+        exe cmd
+        let [l0, l] = [l, line('.')]
+        let openf = foldclosed(l) < 0
+    endwhile
+    if openf
+        call winrestview(view)
+    endif
+    " normal zo
+  endif
+endfunction
+
 nnoremap <BS> zc
-" nnoremap <Bslash> zo
-nmap <Bslash> viizo
+nnoremap <silent> <Bslash> :call NextClosedFold('j')<cr>zo
+" nnoremap <bar> zo
+nmap <bar> viizo
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
