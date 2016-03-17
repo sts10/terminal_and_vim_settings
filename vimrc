@@ -32,7 +32,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
@@ -264,9 +264,15 @@ set formatoptions+=j
 set foldenable
 set foldlevelstart=10
 set foldnestmax=10
-set foldmethod=marker
+set foldmethod=indent
 autocmd FileType vim setlocal foldmethod=marker
-autocmd FileType ruby setlocal foldmethod=marker
+" nnoremap <Leader>r viizO<Esc>`<zfiik
+" nmap <BS> zfiik
+" nmap <Bslash> viizo
+
+nnoremap <BS> zc
+" nnoremap <Bslash> zo
+nmap <Bslash> viizo
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
