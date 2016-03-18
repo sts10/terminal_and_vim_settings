@@ -32,15 +32,16 @@ Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'dhruvasagar/vim-table-mode'
-" Plug 'mhinz/vim-startify'
-Plug 'alvan/vim-closetag'
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
 Plug 'jceb/vim-textobj-uri'             | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'          | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
 Plug 'wellle/targets.vim'
-" Plug 'duff/vim-scratch'
+Plug 'alvan/vim-closetag'
+
+Plug 'sts10/vim-zipper'
+" Plug '~/Documents/code/vim-zipper'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -266,33 +267,6 @@ set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=indent
 autocmd FileType vim setlocal foldmethod=marker
-" nnoremap <Leader>r viizO<Esc>`<zfiik
-" nmap <BS> zfiik
-" nmap <Bslash> viizo
-
-function! NextClosedFold(dir)
-  if (foldclosed(line('.')) > 0)
-    " normal zo
-  else
-    let cmd = 'norm!z' . a:dir
-    let view = winsaveview()
-    let [l0, l, openf] = [0, view.lnum, 1]
-    while l != l0 && openf
-        exe cmd
-        let [l0, l] = [l, line('.')]
-        let openf = foldclosed(l) < 0
-    endwhile
-    if openf
-        call winrestview(view)
-    endif
-    " normal zo
-  endif
-endfunction
-
-nnoremap <BS> zc
-nnoremap <silent> <Bslash> :call NextClosedFold('j')<cr>zo
-" nnoremap <bar> zo
-nmap <bar> viizo
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
