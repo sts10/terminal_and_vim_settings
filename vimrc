@@ -39,6 +39,7 @@ Plug 'kana/vim-textobj-indent'          | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
 Plug 'wellle/targets.vim'
 Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-fugitive'
 
 Plug 'sts10/vim-zipper'
 " Plug '~/Documents/code/vim-zipper'
@@ -102,6 +103,18 @@ endfunction
 function! s:goyo_leave()
   set scrolloff=5
 endfunction
+
+
+set statusline=%f
+set statusline+=\ %h%w%m%r
+" set statusline+=%y
+set statusline+=%=
+" set statusline+=%=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+set statusline+=%-16(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
+" set statusline+=%-16(\ %l/%L\%)%P   
+set statusline+=\ %P/%L
+set statusline+=\ 
+
 
 " auto-pairs
 " Re-set pairings so it doesn't do anything with single or double quotes
