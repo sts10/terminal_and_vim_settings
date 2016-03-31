@@ -1,5 +1,4 @@
 
-
 " vim-plug (https://github.com/junegunn/vim-plug) settings {{{
 " Automatically install vim-plug and run PlugInstall if vim-plug not found
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -34,6 +33,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
+" Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
 Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
 Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
 Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
@@ -123,6 +123,9 @@ autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4t
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
+" let g:vim_markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
+" let g:vim_markdown_conceal = 0
+" let g:vim_markdown_folding_level = 3
 
 " nmap gx to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
@@ -188,9 +191,6 @@ set sidescrolloff=3
 " show two status lines
 set laststatus=2
 
-" if no filetype specified, set ft=markdown (alternative would be text)
-autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
-
 " if file name is `.gitignore`, be sure to set filetype to text
 autocmd BufNewFile,BufReadPost .gitignore set filetype=text
 
@@ -200,6 +200,9 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " recognize files ending in .csv as csv files
 autocmd BufNewFile,BufReadPost *.csv set filetype=csv
+
+" if no filetype specified, set ft=markdown (alternative would be text)
+autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
 
 " By default don't wrap lines
 set nowrap 
@@ -276,6 +279,8 @@ set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=indent
 autocmd FileType vim setlocal foldmethod=marker
+" thanks to javascript plugin, syntax folding works nicely with javascript
+autocmd FileType javascript setlocal foldmethod=syntax
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
