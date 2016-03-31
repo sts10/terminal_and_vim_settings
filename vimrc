@@ -17,32 +17,35 @@ Plug 'sickill/vim-pasta'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-vinegar'
 Plug 'ervandew/supertab'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-markdown'
-Plug 'sts10/vim-mustard'
-Plug 'junegunn/seoul256.vim'
-Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
+Plug 'wellle/targets.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'tmhedberg/matchit'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'dhruvasagar/vim-table-mode'
+
+Plug 'sts10/vim-mustard'
+Plug 'junegunn/seoul256.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
+Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
+Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
+Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
+Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
+Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
 Plug 'jceb/vim-textobj-uri'             | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'          | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
-Plug 'wellle/targets.vim'
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-fugitive'
 
 Plug 'sts10/vim-zipper'
 " Plug '~/Documents/code/vim-zipper'
+
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -115,23 +118,13 @@ set statusline+=%-16(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
 set statusline+=\ %P/%L
 set statusline+=\ 
 
-
-" auto-pairs
-" Re-set pairings so it doesn't do anything with single or double quotes
-let g:AutoPairs = {'(':')', '[':']', '{':'}', '`':'`'}
-
-" Markdown to HTML 
+" Convert Markdown to HTML 
 autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
-let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json']
+let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
 
-" teach jceb/vim-textobj-uri how to handle markdown URIs
-" autocmd FileType markdown call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)')
-" call textobj#uri#add_positioning_pattern('', '\[[^]]*\](\zs[^)]\+)', 'markdown')
-" call textobj#uri#add_positioning_pattern('', textobj_uri_positioning_patterns_markdown, 'markdown')
-
-" mapm gx and go to visually select a URI and then open it in default browser
+" nmap gx to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
 nmap gx mxviugx<Esc>`x
 " nmap go mxviugx<Esc>`x
@@ -190,7 +183,7 @@ set numberwidth=2
 
 " Screen scrolls 5 lines in front of the cursor 
 set scrolloff=5
-set sidescrolloff=5
+set sidescrolloff=3
 
 " show two status lines
 set laststatus=2
@@ -204,6 +197,9 @@ autocmd BufNewFile,BufReadPost .gitignore set filetype=text
 " Be sure to detect *.md files as markdown, rather than Modula-2
 " via https://github.com/tpope/vim-markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" recognize files ending in .csv as csv files
+autocmd BufNewFile,BufReadPost *.csv set filetype=csv
 
 " By default don't wrap lines
 set nowrap 
@@ -317,9 +313,6 @@ autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
 autocmd FileType text nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType text nnoremap <expr> k v:count ? 'k' : 'gk'
-
-" remap auto-complete line
-inoremap <C-f> <C-x><C-l>
 
 " H to beginning of line, L to the end
 nnoremap H ^

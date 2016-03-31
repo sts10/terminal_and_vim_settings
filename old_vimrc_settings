@@ -113,3 +113,9 @@ endif
 "autocmd FileType ruby imap <buffer> <S-Enter> <C-R>=RubyEndToken()<CR>
 
 " }}}
+
+
+
+" auto-pairs settings
+" Re-set pairings so it doesn't do anything with single or double quotes
+let g:AutoPairs = {'(':')', '[':']', '{':'}', '`':'`'}
