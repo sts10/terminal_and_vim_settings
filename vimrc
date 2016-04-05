@@ -32,6 +32,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
+Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
 Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
