@@ -414,3 +414,9 @@ endfunction
 
 autocmd FileType javascript nnoremap <Leader>j :call UnMinify()<CR>
 autocmd FileType javascript nnoremap <Leader>k mjggvGJ<Esc>`j
+
+" insert word of the line above
+inoremap <C-Y> <C-C>:let @z = @"<CR>mz
+      \:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
+      \:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yw')<CR>
+      \`zp:let @" = @z<CR>a
