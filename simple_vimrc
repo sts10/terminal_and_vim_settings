@@ -1,12 +1,8 @@
 
-" Set Leader {{{
+" Set Leader
 let mapleader = "\<Space>"
-" }}}
 
-" Easier page navigation
-nnoremap <C-e> <C-u>
-nnoremap <C-u> <C-e>
-
+" set statusline
 set statusline=%f
 set statusline+=\ %h%w%m%r
 set statusline+=%=
@@ -15,7 +11,6 @@ set statusline+=\ %P/%L
 set statusline+=\ 
 
 if has("nvim")
-  " pretty colors
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
   " terminal mode remappings
@@ -24,12 +19,10 @@ if has("nvim")
   "nnoremap <c-t> <c-w><c-p>:term<CR>
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
-
 endif
-" }}}
 
 """""""""""""""""""""""""""""
-" Standard Set Up           " {{{ 
+" Standard Settings         " {{{ 
 """""""""""""""""""""""""""""
 
 " Turn syntax highlighting on 
@@ -45,13 +38,9 @@ set background=dark
 " Display relative line numbers
 set relativenumber
 " display the absolute line number at the line you're on
-" set nu!
 set number
 " Keep the line number gutter narrow
 set numberwidth=2
-
-"autocmd FileType markdown setlocal norelativenumber
-"autocmd FileType markdown setlocal nonumber
 
 " Screen scrolls 5 lines in front of the cursor 
 set scrolloff=5
@@ -178,6 +167,10 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " H to beginning of line, L to the end
 nnoremap H ^
 nnoremap L $
+
+" Easier page navigation
+nnoremap <C-e> <C-u>
+nnoremap <C-u> <C-e>
 
 " Have the indent commands re-highlight the last visual selection to make
 " multiple indentations easier
