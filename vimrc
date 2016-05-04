@@ -140,8 +140,10 @@ nmap gx mxviugx<Esc>`x
 """"""""""""""""""""""""""""
 
 if has("nvim")
-  " pretty colors
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  if $TERM_PROGRAM =~ "iTerm"
+    " pretty colors
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
 
   " terminal mode remappings
   tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
@@ -204,6 +206,9 @@ autocmd BufNewFile,BufReadPost *.csv set filetype=csv
 
 " if no filetype specified, set ft=markdown (alternative would be text)
 autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
+
+" Automatically equalize window sizes when Vim window is resized 
+autocmd VimResized * wincmd =
 
 " By default don't wrap lines
 set nowrap 
