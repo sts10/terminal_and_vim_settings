@@ -141,8 +141,8 @@ nmap gx mxviugx<Esc>`x
 
 if has("nvim")
   if $TERM_PROGRAM =~ "iTerm"
-    " pretty colors
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    set termguicolors
+    " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   endif
 
   " terminal mode remappings
@@ -209,6 +209,9 @@ autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
 
 " Automatically equalize window sizes when Vim window is resized 
 autocmd VimResized * wincmd =
+
+" Open splits below and to the right, the same way you read a page
+set splitbelow splitright
 
 " By default don't wrap lines
 set nowrap 
