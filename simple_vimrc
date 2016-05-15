@@ -12,6 +12,7 @@ set statusline+=\
 
 if has("nvim")
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  set termguicolors
 
   " terminal mode remappings
   tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
@@ -61,6 +62,9 @@ autocmd BufNewFile,BufReadPost *.csv set filetype=csv
 
 " if no filetype specified, set ft=markdown (alternative would be text)
 " autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
+
+" Automatically equalize window sizes when Vim window is resized 
+autocmd VimResized * wincmd =
 
 " By default don't wrap lines
 set nowrap 
@@ -262,3 +266,9 @@ endfunction
 
 autocmd FileType javascript nnoremap <Leader>j :call UnMinify()<CR>
 autocmd FileType javascript nnoremap <Leader>k mjggvGJ<Esc>`j
+
+" insert word of the line above
+inoremap <C-Y> <C-C>:let @z = @"<CR>mz
+      \:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
+      \:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yw')<CR>
+      \`zp:let @" = @z<CR>a
