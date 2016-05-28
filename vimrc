@@ -25,7 +25,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tmhedberg/matchit'
-Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
@@ -124,9 +124,6 @@ autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4t
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
-" let g:vim_markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
-" let g:vim_markdown_conceal = 0
-" let g:vim_markdown_folding_level = 3
 
 " nmap gx to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
@@ -283,7 +280,7 @@ filetype indent on
 set formatoptions+=j
 
 " folding
-set foldenable
+" set foldenable
 set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=indent
@@ -428,3 +425,7 @@ inoremap <C-Y> <C-C>:let @z = @"<CR>mz
       \:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
       \:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yw')<CR>
       \`zp:let @" = @z<CR>a
+
+" autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>J d1kk"_ddk"_ddkPkJT-dt-bxxjddpkJ
+autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>J o<esc>kd1kk"_ddk"_ddkPkJT-dt-bxxjddpkJmsj"_dd`s
+autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>K i<cr><cr><esc>3kyy2jp4kyy3jp<C-a>j^2f:lct<space>
