@@ -26,6 +26,7 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tmhedberg/matchit'
 " Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'nelstrom/vim-subrip'
 
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
@@ -36,7 +37,11 @@ Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
 Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
-Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
+
+" not sure which of the following I prefer yet
+" Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
+Plug 'jelera/vim-javascript-syntax',    { 'for': 'javascript' }
+
 Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
@@ -47,6 +52,8 @@ Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
 Plug 'sts10/vim-zipper'
 " Plug '~/Documents/code/vim-zipper'
 
+Plug 'sts10/vim-closed-captioning'
+" Plug '~/Documents/code/vim-closed-caption'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -427,5 +434,5 @@ inoremap <C-Y> <C-C>:let @z = @"<CR>mz
       \`zp:let @" = @z<CR>a
 
 " autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>J d1kk"_ddk"_ddkPkJT-dt-bxxjddpkJ
-autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>J o<esc>kd1kk"_ddk"_ddkPkJT-dt-bxxjddpkJmsj"_dd`s
-autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>K i<cr><cr><esc>3kyy2jp4kyy3jp<C-a>j^2f:lct<space>
+" autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>J 4jo<esc>kd1kk"_ddk"_ddkPkJT-dt-bxxjddpkJmsj"_dd`s
+" autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>K i<cr><cr><esc>3kyy2jp4kyy3jp<C-a>j^2f:lct<space>
