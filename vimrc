@@ -53,7 +53,7 @@ Plug 'sts10/vim-zipper'
 " Plug '~/Documents/code/vim-zipper'
 
 Plug 'sts10/vim-closed-captioning'
-" Plug '~/Documents/code/vim-closed-caption'
+" Plug '~/Documents/code/vim-closed-captioning'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -139,15 +139,20 @@ nmap gx mxviugx<Esc>`x
 
 " }}}
 
+" gui colors if running iTerm
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
+
 """"""""""""""""""""""""""""
 " NeoVim Specific          " {{{
 """"""""""""""""""""""""""""
 
 if has("nvim")
-  if $TERM_PROGRAM =~ "iTerm"
-    set termguicolors
+  " if $TERM_PROGRAM =~ "iTerm"
+    " set termguicolors
     " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
+  " endif
 
   " terminal mode remappings
   tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
@@ -173,7 +178,7 @@ endif
 " Turn syntax highlighting on 
 syntax on
 " start highlighting from 256 lines backwards
-syntax sync minlines=256 
+" syntax sync minlines=256 
 
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
