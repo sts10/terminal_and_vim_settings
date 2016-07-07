@@ -28,12 +28,19 @@ To symlink your normal Vim configuration for NeoVim to use, run `ln -s ~/.vim ~/
 
 My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download). [More info on my colors/font setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/).
 
-### Terminal Colors
+### Terminal
 
-`sam_terminal_2015.terminal` can be imported as a profile in your Terminal application for OS X. If using iTerm2, go to `Preferences > Profiles > Colors` and import `sam_2015_iterm.itermcolors` as a "Color Preset". 
+I'd recommend [iTerm2 v3.0.1+](https://iterm2.com/downloads.html). Some settings to change once installed:
 
-As of January 2016 I'd recommend the recommended test release: iTerm2 2.9.20160113 beta (OS 10.8+) ([dmg download](https://iterm2.com/downloads/beta/iTerm2-2_9_20160113.zip)) or the [Nightly version](http://iterm2.com/downloads/nightly/#/section/home) so you can get [Neovim true color support](http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/)). As a last resort, examine the included screenshot to get my preferred Terminal colors. You could also just import some version of [Solarized Light Terminal profile](https://github.com/tomislav/osx-terminal.app-colors-solarized). 
+- `Preferences > Profiles > Terminal`, set Report Terminal Type "xterm-256color"
+- `Preferences > Profiles > Colors`, import `sam_2015_iterm.itermcolors` as a "Color Preset".
+- `Preferences > Profiles > Colors`, check "Smart Cursor Color"
+- Then in `Preferences > Profiles > Text`
+  - Uncheck "Draw Anti-alias text with thin strokes" or set it to never.
+  - Have both fonts be anti-aliased
+  - (Optional:) Set Cursor to "Box" and turn on blinking.
 
+If using Terminal application for OS X, `sam_terminal_2015.terminal` can be imported as a profile. 
 
 ### Sublime Text
 
