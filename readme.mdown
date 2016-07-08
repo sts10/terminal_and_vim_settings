@@ -32,19 +32,21 @@ My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Downloa
 
 I'd recommend [iTerm2 v3.0.1+](https://iterm2.com/downloads.html). Some settings to change once installed:
 
-- `Preferences > Profiles > Terminal`, set Report Terminal Type "xterm-256color"
-- `Preferences > Profiles > Colors`, import `sam_2015_iterm.itermcolors` as a "Color Preset".
-- `Preferences > Profiles > Colors`, check "Smart Cursor Color"
+- In `Preferences > Profiles > Terminal`, set Report Terminal Type "xterm-256color"
+- In `Preferences > Profiles > Colors`, import `sam_2015_iterm.itermcolors` as a "Color Preset".
+- In `Preferences > Profiles > Colors`, check "Smart Cursor Color"
 - Then in `Preferences > Profiles > Text`
   - Uncheck "Draw Anti-alias text with thin strokes" or set it to never.
   - Have both fonts be anti-aliased
   - (Optional:) Set Cursor to "Box" and turn on blinking.
 
-If using Terminal application for OS X, `sam_terminal_2015.terminal` can be imported as a profile. 
+If using OS X's default Terminal application, `sam_terminal_2015.terminal` can be imported as a profile. 
 
 ### Sublime Text
 
-I've also included two files related to my [Sublime Text 2](http://www.sublimetext.com/2) setup (though most preferences will carry over to [Sublime Text 3](http://www.sublimetext.com/3)). The two files are my user_preferences and my keybindings. My preferred Sublime theme is [Mustard](http://colorsublime.com/theme/Mustard). For spell check and other settings specific to Markdown files, you'll need to write those settings yourself in the appropriate file location. The only major package you might want is ["Expand Selection to Quotes"](https://packagecontrol.io/packages/Expand%20Selection%20to%20Quotes).
+I've also included two files related to my [Sublime Text 2](http://www.sublimetext.com/2) setup (though most preferences will carry over to [Sublime Text 3](http://www.sublimetext.com/3)). The two files are my user_preferences and my keybindings. 
+
+My preferred Sublime theme is [Mustard](http://colorsublime.com/theme/Mustard). For spell check and other settings specific to Markdown files, you'll need to write those settings yourself in the appropriate file location. The only major package you might want is ["Expand Selection to Quotes"](https://packagecontrol.io/packages/Expand%20Selection%20to%20Quotes).
 
 To symlink Sublime's command line tool, run something like `ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl`
 
