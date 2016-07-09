@@ -10,6 +10,7 @@ Rename `bash_profile` to `.bash_profile` and place it into `~/`. If no `~/.bash_
 Note, this `bash_profile` sets `export USR_PATHS="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin"` and adds that to the PATH. Thus, you'll want to add things like the Sublime Text command line tool and other CLTs in `/usr/local/bin` to have easy access to them. 
 
 ### Vim Setup
+
 Consider installing MacVim or Neovim before starting this section. See section below.
 
 1. Rename `vimrc` as `.vimrc` and place it in `~/`. If you're cool replacing any existing `~/.vimrc`, you can do this from the command line by running `curl -o ~/.vimrc https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/vimrc`, or cloning this directory and running `cp vimrc ~/.vimrc` from inside this repo's directory.
@@ -18,11 +19,12 @@ Consider installing MacVim or Neovim before starting this section. See section b
 4. `mustard.vim` is a Vim colorscheme I made to mirror my preferred [Sublime Text](http://www.sublimetext.com/) theme, [Mustard](http://colorsublime.com/theme/Mustard). I have [sts10/vim-mustard.vim](https://github.com/sts10/vim-mustard) listed as a plugin in this `vimrc`, so the colorscheme should install when you run `:PlugInstall`. But if it doesn't, place `mustard.vim` into `~/.vim/colors/` (which you may have to `mkdir` yourself). Then either run `:colorscheme mustard` and then `set background=dark` or put those two commands into your `.vimrc` (they're already in the `vimrc` file in this repo).
 
 ### Flavors of Vim
+
 - Installing **MacVim**: [Download the .dmg file of the latest MacVim snapshot from the macvim-dev fork](https://github.com/macvim-dev/macvim/releases/) (though it may be better/easier to update MacVim if [installed from the command line via Homebrew](http://apple.stackexchange.com/questions/59375/how-do-i-install-macvim)). Once installed, you're going to want to setup the command line `mvim` command (should be included in the download) by putting the `mvim` file in place-- you can do this by running `cp mvim /usr/local/bin/` (although it might better to symlink it with `ln` command?). For help, here's [my blog post on making the switch](http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/).
 - Installing **NeoVim**: [Instructions for installing NeoVim with Homebrew](https://github.com/neovim/homebrew-neovim/blob/master/README.md) plus [my blog post on NeoVim](http://sts10.github.io/blog/2015/08/11/neovim-an-open-source-project/). Homebrew [lives here](http://brew.sh/). Neovim's ["Following HEAD" page lives here](https://github.com/neovim/neovim/wiki/Following-HEAD). 
 To symlink your normal Vim configuration for NeoVim to use, run `ln -s ~/.vim ~/.config/nvim` and `ln -s ~/.vimrc ~/.config/nvim/init.vim` after installation. There's also [an OS X iTerm + Neovim app launcher](https://github.com/flipxfx/neovim-iterm-app).
 - Installing **Neovim dot app**: [neovim dot app](https://github.com/rogual/neovim-dot-app) is an experimental Mac OS X GUI for Neovim. As of this writing you can install it via Homebrew. The command line tool is `gnvim`. Here is [my blog post about it](http://sts10.github.io/blog/2015/10/24/neovim-dot-app/).
-- Installing the latest version of **(Terminal) Vim**: We're going to use Homebrew, but since we prefer vim-plug, here's how we've got to do this. If you already have [RVM](https://rvm.io/) installed, first run `rvm use system`, then run `brew install vim`, then return to your preferred version of Ruby for RVM. You shouldn't need any special alias in your `bash_profile` to use this new version of Vim. If that doesn't work smoothly, here's a [helpful blog post](http://www.prioritized.net/blog/upgrading-vim-on-os-x/) on how to update your command line Vim using Homebrew. (Hint: `which vim` tells you where your `vim` lives.)
+- Installing the latest version of **(Terminal) Vim**: We're going to use Homebrew, but since we prefer vim-plug, here's how we've got to do this. If you already have [RVM](https://rvm.io/) installed, first run `rvm use system`, then run `brew install vim`, then return to your preferred version of Ruby for RVM. You shouldn't need any special alias in your `bash_profile` to use this new version of Vim. If that doesn't work smoothly. Note: `which vim` tells you where your `vim` lives.
 
 ### Coding Font
 
@@ -39,6 +41,8 @@ I'd recommend [iTerm2 v3.0.1+](https://iterm2.com/downloads.html). Some settings
   - Uncheck "Draw Anti-alias text with thin strokes" or set it to never.
   - Have both fonts be anti-aliased
   - (Optional:) Set Cursor to "Box" and turn on blinking.
+- In `Preferences > Advanced`, search for "Terminal windows resize smoothly", and change it to "Yes".
+- I'm not sure if you have to set the background and foreground colors manually.
 
 If using OS X's default Terminal application, `sam_terminal_2015.terminal` can be imported as a profile. 
 
