@@ -20,23 +20,23 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/goyo.vim'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tmhedberg/matchit'
+" Plug 'tmhedberg/matchit'
+" Plug 'terryma/vim-multiple-cursors'
 " Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'nelstrom/vim-subrip'
 
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'romainl/flattened'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
-Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
+" Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
 
 " not sure which of the following I prefer yet
 " Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
@@ -52,7 +52,7 @@ Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
 Plug 'sts10/vim-zipper'
 " Plug '~/Documents/code/vim-zipper'
 
-Plug 'sts10/vim-closed-captioning'
+Plug 'sts10/vim-closed-captioning', { 'for': 'srt' }
 " Plug '~/Documents/code/vim-closed-captioning'
 
 " All of your Plugins must be added before the following line
@@ -85,6 +85,10 @@ imap <C-l> <ESC>gcc
 " vim-move set to <C-k> and <C-j>
 let g:move_key_modifier = 'C'
 
+" vim-closed-captioning
+autocmd Filetype srt nmap gJ <Plug>JoinCaption
+autocmd Filetype srt nmap gK <Plug>SplitCaption
+
 " Easier page navigation
 nnoremap <C-e> <C-u>
 nnoremap <C-u> <C-e>
@@ -115,6 +119,7 @@ function! s:goyo_leave()
   set scrolloff=5
 endfunction
 
+" Construct statusline
 
 set statusline=%f
 set statusline+=\ %h%w%m%r
@@ -309,7 +314,7 @@ autocmd FileType markdown setlocal complete+=kspell
 " Turn on auto-complete for various languages
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 " }}}
