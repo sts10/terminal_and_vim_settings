@@ -34,15 +34,15 @@ Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
+Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
 " Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
 
 " not sure which of the following I prefer yet
-" Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax',    { 'for': 'javascript' }
+" Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
 
-Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
 Plug 'jceb/vim-textobj-uri'             | Plug 'kana/vim-textobj-user'
@@ -305,11 +305,14 @@ autocmd FileType vim setlocal foldmethod=marker
 " thanks to javascript plugin, syntax folding works nicely with javascript
 autocmd FileType javascript setlocal foldmethod=syntax
 
-" turn on spell check for markdown files
+" turn on spell check for the following filetypes
 autocmd FileType markdown setlocal spell spelllang=en_us
+autocmd FileType srt setlocal spell spelllang=en_us
+
 " add the spelling dictionary to the end of the list of sources to check for
 " auto completion
 autocmd FileType markdown setlocal complete+=kspell 
+autocmd FileType srt setlocal complete+=kspell 
 
 " Turn on auto-complete for various languages
 set omnifunc=syntaxcomplete#Complete
