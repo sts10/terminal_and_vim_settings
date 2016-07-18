@@ -28,13 +28,11 @@ endif
 
 " Turn syntax highlighting on 
 syntax on
-" start highlighting from 256 lines backwards
-syntax sync minlines=256 
 
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
-colorscheme mustard
-set background=dark
+" colorscheme mustard
+" set background=dark
 
 " Display relative line numbers
 set relativenumber
