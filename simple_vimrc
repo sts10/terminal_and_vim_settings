@@ -135,9 +135,11 @@ autocmd FileType vim setlocal foldmethod=marker
 
 " turn on spell check for markdown files
 autocmd FileType markdown setlocal spell spelllang=en_us
+autocmd FileType srt setlocal spell spelllang=en_us
 " add the spelling dictionary to the end of the list of sources to check for
 " auto completion
 autocmd FileType markdown setlocal complete+=kspell 
+autocmd FileType srt setlocal complete+=kspell 
 
 " }}}
 
@@ -165,10 +167,6 @@ nnoremap <C-k> :m -2<CR>==
 " Move in visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
-
-" H to beginning of line, L to the end
-nnoremap H ^
-nnoremap L $
 
 " Easier page navigation
 nnoremap <C-e> <C-u>
@@ -242,7 +240,7 @@ nnoremap <Down> <C-w>j
 nnoremap <Space>t <C-w>5+
 nnoremap <Space>f <C-w>5>
 
-" Allow some of the emacs motions on the vim command line.
+" Allow some of the readline motions on the vim command line.
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-B> <Left>
