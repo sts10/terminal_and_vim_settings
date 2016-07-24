@@ -28,7 +28,7 @@ To symlink your normal Vim configuration for NeoVim to use, run `ln -s ~/.vim ~/
 
 ### Coding Font
 
-My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download). [More info on my colors/font setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/).
+My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download). If unavailable, [Hack](https://github.com/chrissimpkins/Hack) is a nice alternative. [More info on my colors/font setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/). 
 
 ### Terminal
 
