@@ -10,9 +10,12 @@ set statusline+=%=
 set statusline+=\ %P/%L
 set statusline+=\ 
 
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
+
 if has("nvim")
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  set termguicolors
 
   " terminal mode remappings
   tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
