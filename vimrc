@@ -22,7 +22,6 @@ Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tmhedberg/matchit'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'AndrewRadev/splitjoin.vim'
 
@@ -30,6 +29,7 @@ Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
 Plug 'romainl/flattened'
 " Plug 'altercation/vim-colors-solarized'
+Plug 'tmhedberg/matchit',          { 'for': ['html', 'xml'] }
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
@@ -40,7 +40,7 @@ Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 
 " not sure which of the following I prefer yet
 Plug 'jelera/vim-javascript-syntax',    { 'for': 'javascript' }
-Plug '1995eaton/vim-better-javascript-completion'
+Plug '1995eaton/vim-better-javascript-completion',    { 'for': 'javascript' }
 " Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
 
 Plug 'kana/vim-textobj-user'
