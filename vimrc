@@ -22,7 +22,7 @@ Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
-" Plug 'tmhedberg/matchit'
+Plug 'tmhedberg/matchit'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'AndrewRadev/splitjoin.vim'
 
@@ -33,14 +33,14 @@ Plug 'romainl/flattened'
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
-Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
+Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
-" Plug 'alvan/vim-closetag',         { 'for': ['html','xml', 'xhtml'] }
 
 " not sure which of the following I prefer yet
 Plug 'jelera/vim-javascript-syntax',    { 'for': 'javascript' }
+Plug '1995eaton/vim-better-javascript-completion'
 " Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
 
 Plug 'kana/vim-textobj-user'
@@ -133,14 +133,18 @@ set statusline+=\
 
 " Convert Markdown to HTML 
 autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
+autocmd FileType html nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
 
 " nmap gx to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
+
 nmap gx mxviugx<Esc>`x
 " nmap go mxviugx<Esc>`x
+" for markdown referenced links
+nmap gr gogogx
 
 " }}}
 
@@ -345,15 +349,6 @@ autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
 autocmd FileType text nnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType text nnoremap <expr> k v:count ? 'k' : 'gk'
 
-" H to beginning of line, L to the end
-nnoremap H ^
-nnoremap L $
-
-" Have the indent commands re-highlight the last visual selection to make
-" multiple indentations easier
-vnoremap > >gv
-vnoremap < <gv
-
 " Make the dot command work as expected in visual mode (via
 " https://www.reddit.com/r/vim/comments/3y2mgt/do_you_have_any_minor_customizationsmappings_that/cya0x04)
 vnoremap . :norm.<CR>
@@ -437,8 +432,8 @@ function! UnMinify()
     normal ggVG=`j
 endfunction
 
-autocmd FileType javascript nnoremap <Leader>j :call UnMinify()<CR>
-autocmd FileType javascript nnoremap <Leader>k mjggvGJ<Esc>`j
+autocmd FileType javascript nnoremap <Leader>j mjggvGJ<Esc>`j
+autocmd FileType javascript nnoremap <Leader>k :call UnMinify()<CR>
 
 " insert word of the line above
 inoremap <C-Y> <C-C>:let @z = @"<CR>mz
@@ -446,6 +441,3 @@ inoremap <C-Y> <C-C>:let @z = @"<CR>mz
       \:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yw')<CR>
       \`zp:let @" = @z<CR>a
 
-" autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>J d1kk"_ddk"_ddkPkJT-dt-bxxjddpkJ
-" autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>J 4jo<esc>kd1kk"_ddk"_ddkPkJT-dt-bxxjddpkJmsj"_dd`s
-" autocmd BufNewFile,BufReadPost *.srt nnoremap <Leader>K i<cr><cr><esc>3kyy2jp4kyy3jp<C-a>j^2f:lct<space>
