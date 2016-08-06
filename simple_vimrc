@@ -127,7 +127,7 @@ filetype plugin on
 filetype indent on
 
 " Delete comment character when joining commented lines
-set formatoptions+=j
+" set formatoptions+=j
 
 " folding
 set foldenable
