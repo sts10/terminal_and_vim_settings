@@ -22,6 +22,7 @@ Plug 'tpope/vim-repeat'
 Plug 'bronson/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'gcavallanti/vim-noscrollbar'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'AndrewRadev/splitjoin.vim'
 
@@ -124,10 +125,11 @@ endfunction
 set statusline=%f
 set statusline+=\ %h%w%m%r
 " set statusline+=%y
-set statusline+=%=
 " set statusline+=%=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
-set statusline+=%-16(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
+set statusline+=%14(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
+set statusline+=%=
 " set statusline+=%-16(\ %l/%L\%)%P   
+set statusline+=\ %{noscrollbar#statusline(9,'_','=')}
 set statusline+=\ %P/%L
 set statusline+=\ 
 
@@ -143,8 +145,6 @@ let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python'
 
 nmap gx mxviugx<Esc>`x
 " nmap go mxviugx<Esc>`x
-" for markdown referenced links
-nmap gr gogogx
 
 " }}}
 
@@ -366,6 +366,10 @@ endfunction
 " brackets, then dumps system clipboard contents into parenthesis
 autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 
+" use gr to follow referenced links in markdown (relies on URI text object
+" plugin)
+autocmd FileType markdown nnoremap gr mxgogogx`x
+
 " D deletes to the end of the line, and Y yanks to end of line
 nnoremap D d$
 nnoremap Y y$
@@ -400,7 +404,8 @@ vnoremap <Leader>d "*d
 " }}}
 
 " place whole file on the system clipboard (and return cursor to where it was)
-nmap <Leader>a maggVG"*y`a
+" nmap <Leader>a maggVG"*y`a
+nnoremap <Leader>a :%y*<cr>
 
 " Window management, plus some methods of expanding a window quickly
 nnoremap <Leader><Leader> <C-w><C-w>
