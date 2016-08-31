@@ -25,6 +25,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'gcavallanti/vim-noscrollbar'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'metakirby5/codi.vim'
 
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
@@ -306,8 +307,8 @@ set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=indent
 autocmd FileType vim setlocal foldmethod=marker
-" thanks to javascript plugin, syntax folding works nicely with javascript
-autocmd FileType javascript setlocal foldmethod=syntax
+" thanks to javascript plugin, syntax folding should work nicely with javascript, but I've found it unreliable
+" autocmd FileType javascript setlocal foldmethod=syntax
 
 " turn on spell check for the following filetypes
 autocmd FileType markdown setlocal spell spelllang=en_us
@@ -437,8 +438,8 @@ function! UnMinify()
     normal ggVG=`j
 endfunction
 
-autocmd FileType javascript nnoremap <Leader>j mjggvGJ<Esc>`j
-autocmd FileType javascript nnoremap <Leader>k :call UnMinify()<CR>
+autocmd FileType javascript nnoremap gJ mjggvGJ<Esc>`j
+autocmd FileType javascript nnoremap gK :call UnMinify()<CR>
 
 " insert word of the line above
 inoremap <C-Y> <C-C>:let @z = @"<CR>mz
