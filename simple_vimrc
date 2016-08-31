@@ -136,7 +136,7 @@ set foldnestmax=10
 set foldmethod=indent
 autocmd FileType vim setlocal foldmethod=marker
 
-" turn on spell check for markdown files
+" turn on spell check for markdown and srt files
 autocmd FileType markdown setlocal spell spelllang=en_us
 autocmd FileType srt setlocal spell spelllang=en_us
 " add the spelling dictionary to the end of the list of sources to check for
@@ -263,8 +263,8 @@ function! UnMinify()
     normal ggVG=`j
 endfunction
 
-autocmd FileType javascript nnoremap <Leader>j :call UnMinify()<CR>
-autocmd FileType javascript nnoremap <Leader>k mjggvGJ<Esc>`j
+autocmd FileType javascript nnoremap gJ :call UnMinify()<CR>
+autocmd FileType javascript nnoremap gK mjggvGJ<Esc>`j
 
 " insert word of the line above
 inoremap <C-Y> <C-C>:let @z = @"<CR>mz
