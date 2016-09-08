@@ -8,30 +8,39 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'terryma/vim-smooth-scroll'
+" basics
 Plug 'matze/vim-move'
 Plug 'tpope/vim-commentary'
 Plug 'sickill/vim-pasta'
 Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-vinegar'
 Plug 'ervandew/supertab'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+" niceties
+Plug 'terryma/vim-smooth-scroll'
 Plug 'bronson/vim-visual-star-search'
 Plug 'wellle/targets.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'tmhedberg/matchit',          { 'for': ['html', 'xml'] }
+
+" Status Bar
 Plug 'tpope/vim-fugitive'
 Plug 'gcavallanti/vim-noscrollbar'
+" File management
+Plug 'tpope/vim-vinegar'
+Plug 'EinfachToll/DidYouMean'
+Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'metakirby5/codi.vim'
 
+" colorschemes
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
 Plug 'romainl/flattened'
 " Plug 'altercation/vim-colors-solarized'
-Plug 'tmhedberg/matchit',          { 'for': ['html', 'xml'] }
+
+" language or filetype specific
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
@@ -39,12 +48,15 @@ Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
+Plug 'sts10/vim-closed-captioning', { 'for': 'srt' }
+" Plug '~/Documents/code/vim-closed-captioning'
 
 " not sure which of the following I prefer yet
 Plug 'jelera/vim-javascript-syntax',    { 'for': 'javascript' }
 Plug '1995eaton/vim-better-javascript-completion',    { 'for': 'javascript' }
 " Plug 'pangloss/vim-javascript',    { 'for': 'javascript' }
 
+" text objects
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
 Plug 'jceb/vim-textobj-uri'             | Plug 'kana/vim-textobj-user'
@@ -53,9 +65,6 @@ Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
 
 Plug 'sts10/vim-zipper'
 " Plug '~/Documents/code/vim-zipper'
-
-Plug 'sts10/vim-closed-captioning', { 'for': 'srt' }
-" Plug '~/Documents/code/vim-closed-captioning'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -90,6 +99,8 @@ let g:move_key_modifier = 'C'
 " vim-closed-captioning
 autocmd Filetype srt nmap gJ <Plug>JoinCaption
 autocmd Filetype srt nmap gK <Plug>SplitCaption
+
+autocmd Filetype srt nmap <C-s> mx^~`x
 
 " Easier page navigation
 nnoremap <C-e> <C-u>
@@ -127,7 +138,7 @@ set statusline=%f
 set statusline+=\ %h%w%m%r
 " set statusline+=%y
 " set statusline+=%=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
-set statusline+=%14(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
+set statusline+=%17(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
 set statusline+=%=
 " set statusline+=%-16(\ %l/%L\%)%P   
 set statusline+=\ %{noscrollbar#statusline(9,'_','=')}
