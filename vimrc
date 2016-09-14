@@ -286,6 +286,7 @@ autocmd FileType python setlocal shiftwidth=4
 " auto indent
 set autoindent
 set smartindent 
+set breakindent
 
 " turn on the wildmenu cuz everyone says to
 set wildmenu
