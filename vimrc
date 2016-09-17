@@ -260,14 +260,26 @@ set linebreak
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos. 
-" Pretty sure you need to mkdir backup, swap, and undo first to make this work
+" But first mkdir backup, swap, and undo first to make this work
+call system('mkdir ~/.vim')
+call system('mkdir ~/.vim/backup')
+call system('mkdir ~/.vim/swap')
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 
-set undofile                " Save undo's after file closes
-set undodir=~/.vim/undo
-set undolevels=1000         " How many undos
-set undoreload=10000        " number of lines to save for undo
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand('~/.vim/undo')
+    " Create dirs
+    call system('mkdir ~/.vim/undo')
+    let &undodir = '~/.vim/undo'
+    set undofile
+    set undolevels=1000         " How many undos
+    set undoreload=10000        " number of lines to save for undo
+endif
+" set undofile                " Save undo's after file closes
+" set undodir=~/.vim/undo
+" set undodir=$HOME/.vim/undo " where to save undo histories
 
 " show commands as you type them
 set sc
