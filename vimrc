@@ -271,10 +271,11 @@ set directory=~/.vim/swap//
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    let myUndoDir = expand('~/.vim/undo')
-    " Create dirs
+    " let myUndoDir = expand('~/.vim/undo')
     call system('mkdir ~/.vim/undo')
-    let &undodir = '~/.vim/undo'
+    " unclear if I should have one ore two forward slashes after undo in the
+    " line below
+    set undodir=~/.vim/undo//
     set undofile
     set undolevels=1000         " How many undos
     set undoreload=10000        " number of lines to save for undo
