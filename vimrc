@@ -82,6 +82,7 @@ call plug#end()
 let mapleader = "\<Space>"
 " }}}
 
+
 """""""""""""""""""""""""""""""
 " Plugin Settings             " {{{
 """""""""""""""""""""""""""""""
@@ -375,12 +376,16 @@ nnoremap <S-Enter> o<Esc>
 " j and k don't skip over wrapped lines in following FileTypes, unless given a
 " count (helpful since I display relative line numbers in these file types)
 " (https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o)
-autocmd FileType html nnoremap <expr> j v:count ? 'j' : 'gj'
-autocmd FileType html nnoremap <expr> k v:count ? 'k' : 'gk'
-autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
-autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
-autocmd FileType text nnoremap <expr> j v:count ? 'j' : 'gj'
-autocmd FileType text nnoremap <expr> k v:count ? 'k' : 'gk'
+autocmd FileType html,markdown,text nnoremap <expr> j v:count ? 'j' : 'gj'
+autocmd FileType html,markdown,text nnoremap <expr> k v:count ? 'k' : 'gk'
+
+autocmd FileType html,markdown,text vnoremap <expr> j v:count ? 'j' : 'gj'
+autocmd FileType html,markdown,text vnoremap <expr> k v:count ? 'k' : 'gk'
+
+" autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
+" autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
+" autocmd FileType text nnoremap <expr> j v:count ? 'j' : 'gj'
+" autocmd FileType text nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Make the dot command work as expected in visual mode (via
 " https://www.reddit.com/r/vim/comments/3y2mgt/do_you_have_any_minor_customizationsmappings_that/cya0x04)
