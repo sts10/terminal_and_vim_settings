@@ -11,9 +11,9 @@ Note, this `bash_profile` sets `export USR_PATHS="/usr/local:/usr/local/bin:/usr
 
 ### Vim Setup
 
-Consider installing MacVim or Neovim before starting this section. See section below.
+Consider installing an up-to-date version your preferred type of Vim before starting this section. See section below.
 
-Replace your current vimrc with the one from his repo by simply run 
+Replace your current vimrc with mine by running:
 
 ```shell
 curl -o ~/.vimrc https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/vimrc
@@ -31,7 +31,7 @@ curl -o ~/.vimrc https://raw.githubusercontent.com/sts10/terminal_and_vim_settin
 - Installing **NeoVim**: [Instructions for installing NeoVim with Homebrew](https://github.com/neovim/homebrew-neovim/blob/master/README.md) plus [my blog post on NeoVim](http://sts10.github.io/blog/2015/08/11/neovim-an-open-source-project/). Homebrew [lives here](http://brew.sh/). Neovim's ["Following HEAD" page lives here](https://github.com/neovim/neovim/wiki/Following-HEAD). 
 To symlink your normal Vim configuration for NeoVim to use, run `ln -s ~/.vim ~/.config/nvim` and `ln -s ~/.vimrc ~/.config/nvim/init.vim` after installation. There's also [an OS X iTerm + Neovim app launcher](https://github.com/flipxfx/neovim-iterm-app).
 - Installing **Neovim dot app**: [neovim dot app](https://github.com/rogual/neovim-dot-app) is an experimental Mac OS X GUI for Neovim. As of this writing you can install it via Homebrew. The command line tool is `gnvim`. Here is [my blog post about it](http://sts10.github.io/blog/2015/10/24/neovim-dot-app/).
-- Installing the latest version of **(Terminal) Vim**: We're going to use Homebrew, but since we prefer vim-plug, here's how we've got to do this. If you already have [RVM](https://rvm.io/) installed, first run `rvm use system`, then run `brew install vim`, then return to your preferred version of Ruby for RVM. You shouldn't need any special alias in your `bash_profile` to use this new version of Vim. If that doesn't work smoothly. Note: `which vim` tells you where your `vim` lives.
+- Installing the latest version of **(Terminal) Vim**: We're going to use Homebrew, but since we prefer vim-plug, here's how we've got to do this. If you already have [RVM](https://rvm.io/) installed, first run `rvm use system`, then run `brew install vim`, then return to your preferred version of Ruby for RVM. You shouldn't need any special alias in your `bash_profile` to use this new version of Vim. Note: `which vim` tells you where your `vim` lives.
 
 ### Coding Font
 
@@ -51,7 +51,7 @@ I'd recommend [iTerm2 v3.0.1+](https://iterm2.com/downloads.html). Some settings
 - In `Preferences > Advanced`, search for "Terminal windows resize smoothly", and change it to "Yes".
 - I'm not sure if you have to set the background and foreground colors manually.
 
-If using OS X's default Terminal application, `sam_terminal_2015.terminal` can be imported as a profile. 
+If using OS X's default Terminal application (which I don't recommend given its handling of colors, particularly when using Vim), `sam_terminal_2015.terminal` can be imported as a profile. 
 
 ### Sublime Text
 
