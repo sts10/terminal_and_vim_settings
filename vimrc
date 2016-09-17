@@ -8,7 +8,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" basics
+" Basics
 Plug 'matze/vim-move'
 Plug 'tpope/vim-commentary'
 Plug 'sickill/vim-pasta'
@@ -16,37 +16,43 @@ Plug 'justinmk/vim-sneak'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-" niceties
+
+" Niceties
 Plug 'terryma/vim-smooth-scroll'
 Plug 'bronson/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'tmhedberg/matchit',          { 'for': ['html', 'xml'] }
+Plug 'sts10/vim-zipper'
+" Plug '~/Documents/code/vim-zipper'
+
+" Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'metakirby5/codi.vim'
 
 " Status Bar
 Plug 'tpope/vim-fugitive'
 Plug 'gcavallanti/vim-noscrollbar'
+
 " File management
 Plug 'tpope/vim-vinegar'
 Plug 'EinfachToll/DidYouMean'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'terryma/vim-multiple-cursors'
-" Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'metakirby5/codi.vim'
 
 " colorschemes
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
-Plug 'romainl/flattened'
-" Plug 'altercation/vim-colors-solarized'
+Plug 'jacoborus/tender'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'romainl/flattened'
 
 " language or filetype specific
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
 Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
-Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
 Plug 'sts10/vim-closed-captioning', { 'for': 'srt' }
 " Plug '~/Documents/code/vim-closed-captioning'
@@ -63,8 +69,6 @@ Plug 'jceb/vim-textobj-uri'             | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'          | Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'            | Plug 'kana/vim-textobj-user'
 
-Plug 'sts10/vim-zipper'
-" Plug '~/Documents/code/vim-zipper'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -259,7 +263,11 @@ set linebreak
 " Pretty sure you need to mkdir backup, swap, and undo first to make this work
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+
+set undofile                " Save undo's after file closes
+set undodir=~/.vim/undo
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
 
 " show commands as you type them
 set sc
@@ -406,7 +414,8 @@ vnoremap c "_c
 nnoremap <Leader>p "*]p
 nnoremap <Leader>P "*]P
 
-nnoremap <Leader>y ma^"*y$`a
+nnoremap <Leader>y :y*<cr>
+" nnoremap <Leader>y ma^"*y$`a
 nnoremap <Leader>c ^"*c$
 nnoremap <Leader>d ^"*d$
 
