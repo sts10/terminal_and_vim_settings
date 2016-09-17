@@ -54,6 +54,7 @@ Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
+Plug 'othree/html5.vim'
 Plug 'sts10/vim-closed-captioning', { 'for': 'srt' }
 " Plug '~/Documents/code/vim-closed-captioning'
 
