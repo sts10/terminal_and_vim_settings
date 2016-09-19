@@ -105,7 +105,7 @@ nnoremap <Leader>v :vsplit<CR><c-w>l<c-p>
 " selection
 nmap <C-l> gcc
 vmap <C-l> gcgv
-imap <C-l> <ESC>gcc
+" imap <C-l> <ESC>gcc
 
 " vim-move set to <C-k> and <C-j>
 let g:move_key_modifier = 'C'
