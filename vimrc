@@ -38,6 +38,7 @@ Plug 'gcavallanti/vim-noscrollbar'
 Plug 'tpope/vim-vinegar'
 Plug 'EinfachToll/DidYouMean'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rstacruz/vim-xtract'
 
 " colorschemes
 Plug 'sts10/vim-mustard'
@@ -106,6 +107,7 @@ let g:move_key_modifier = 'C'
 autocmd Filetype srt nmap gJ <Plug>JoinCaption
 autocmd Filetype srt nmap gK <Plug>SplitCaption
 
+autocmd Filetype srt nmap gS mx^~`x
 autocmd Filetype srt nmap <C-s> mx^~`x
 
 " Easier page navigation
@@ -161,7 +163,8 @@ let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python'
 " nmap gx to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
 
-nmap gx mxviugx<Esc>`x
+" nmap gx mxviugx<Esc>`x
+nnoremap gx :normal mxviugx<Esc>`x
 " nmap go mxviugx<Esc>`x
 
 " }}}
@@ -447,6 +450,9 @@ vnoremap <Leader>d "*d
 " place whole file on the system clipboard (and return cursor to where it was)
 " nmap <Leader>a maggVG"*y`a
 nnoremap <Leader>a :%y*<cr>
+
+" highlight last inserted text
+nnoremap gV `[v`]
 
 " Window management, plus some methods of expanding a window quickly
 nnoremap <Leader><Leader> <C-w><C-w>
