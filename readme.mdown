@@ -9,6 +9,8 @@ Rename `bash_profile` to `.bash_profile` and place it into `~/`. If no `~/.bash_
 
 Note, this `bash_profile` sets `export USR_PATHS="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin"` and adds that to the PATH. Thus, you'll want to add things like the Sublime Text command line tool and other CLTs in `/usr/local/bin` to have easy access to them. 
 
+This `bash_profile` is based off [the Flatiron School's recommended bash profile](https://github.com/flatiron-school/dotfiles/blob/master/bash_profile).
+
 ### Vim Setup
 
 Consider installing an up-to-date version your preferred type of Vim before starting this section. See section below.
