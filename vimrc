@@ -45,15 +45,15 @@ Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
 Plug 'jacoborus/tender'
 Plug 'altercation/vim-colors-solarized'
-" Plug 'romainl/flattened'
+Plug 'romainl/flattened'
 
 " language or filetype specific
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
 Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
-Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
+Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
 Plug 'othree/html5.vim'
 Plug 'sts10/vim-closed-captioning', { 'for': 'srt' }
@@ -164,8 +164,13 @@ let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python'
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
 
 " nmap gx mxviugx<Esc>`x
-nnoremap gx :normal mxviugx<Esc>`x
+nnoremap <silent> gx :normal mxviugx<Esc>`x
 " nmap go mxviugx<Esc>`x
+
+" remap gX to open current file with system open command
+" i.e. an HTML file will open in your default browser
+" via https://www.reddit.com/r/vim/comments/5mq6v6/way_to_do_netrwgx_on_buffer/dc5i78h/
+nnoremap <silent> gX :call system('open ' . expand('%'))<CR>
 
 " }}}
 
@@ -408,6 +413,7 @@ endfunction
 " In markdown files, Control + a surrounds highlighted text with square
 " brackets, then dumps system clipboard contents into parenthesis
 autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
+" autocmd FileType markdown nnoremap <c-t> yiwi[<Esc>ea](https://twitter.com/<Esc>pa)<Esc>
 
 " use gr to follow referenced links in markdown (relies on URI text object
 " plugin)
