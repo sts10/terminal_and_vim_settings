@@ -189,6 +189,8 @@ if has("nvim")
     " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " endif
 
+  set inccommand=nosplit
+
   " terminal mode remappings
   tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
   tnoremap <Esc><Esc> <C-\><C-n>:q<CR>
