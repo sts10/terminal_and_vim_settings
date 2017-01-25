@@ -156,6 +156,8 @@ set statusline+=\
 " Convert Markdown to HTML 
 autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 autocmd FileType html nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
+autocmd FileType html vnoremap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4tags<CR> `[v`]==<esc>
+" autocmd FileType html omap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4tags<CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
@@ -464,13 +466,12 @@ nnoremap gV `[v`]
 
 " Window management, plus some methods of expanding a window quickly
 nnoremap <Leader><Leader> <C-w><C-w>
-" nnoremap <Space> <C-w>
 nnoremap <Right> <C-w>l
 nnoremap <Left> <C-w>h
 nnoremap <Up> <C-w>k
 nnoremap <Down> <C-w>j
-nnoremap <Space>t <C-w>5+
-nnoremap <Space>f <C-w>5>
+" nnoremap <Space>t <C-w>5+
+" nnoremap <Space>f <C-w>5>
 
 " Allow some of the emacs motions on the vim command line.
 cnoremap <C-A> <Home>
