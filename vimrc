@@ -157,7 +157,7 @@ set statusline+=\
 autocmd FileType markdown nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 autocmd FileType html nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <CR>
 autocmd FileType html vnoremap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4tags<CR> `[v`]==<esc>
-" autocmd FileType html omap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4tags<CR>
+" autocmd FileType html omap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4tags<CR> `[v`]==<esc>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
 let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
@@ -186,11 +186,11 @@ endif
 """"""""""""""""""""""""""""
 
 if has("nvim")
-  " if $TERM_PROGRAM =~ "iTerm"
-    " set termguicolors
-    " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  " endif
-
+  if $TERM_PROGRAM =~ "iTerm"
+    " no funny business with the cursor when using realtively new versions of
+    " Neovim
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
+  endif
   set inccommand=nosplit
 
   " terminal mode remappings
