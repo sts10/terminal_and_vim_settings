@@ -187,10 +187,12 @@ endif
 
 if has("nvim")
   if $TERM_PROGRAM =~ "iTerm"
-    " no funny business with the cursor when using realtively new versions of
-    " Neovim
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
   endif
+  " no funny business with the cursor when using realtively new versions of
+  " Neovim
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
+  set guicursor=
+
   set inccommand=nosplit
 
   " terminal mode remappings
