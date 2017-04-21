@@ -1,6 +1,5 @@
 
 " vim-plug (https://github.com/junegunn/vim-plug) settings {{{
-" call plug#begin('~/.vim/plugged')
 call plug#begin('~/.config/nvim/plugged')
 " Basics
 Plug 'matze/vim-move'
@@ -186,6 +185,10 @@ if has("nvim")
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
 
+  " Have a straight-forward block cursor when using Neovim 2.0.X
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
+  set guicursor=
+
   " for fzf
   " imap <C-f> <plug>(fzf-complete-line)
 endif
@@ -264,26 +267,23 @@ set linebreak
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos. 
 " But first mkdir backup, swap, and undo first to make this work
-call system('mkdir ~/.vim')
-call system('mkdir ~/.vim/backup')
-call system('mkdir ~/.vim/swap')
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
+call system('mkdir ~/.config/nvim')
+call system('mkdir ~/.config/nvim/backup')
+call system('mkdir ~/.config/nvim/swap')
+set backupdir=~/.config/nvim/backup//
+set directory=~/.config/nvim/swap//
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    " let myUndoDir = expand('~/.vim/undo')
-    call system('mkdir ~/.vim/undo')
+    call system('mkdir ~/.config/nvim/undo')
+    
     " unclear if I should have one ore two forward slashes after undo in the
     " line below
-    set undodir=~/.vim/undo//
+    set undodir=~/.config/nvim/undo//
     set undofile
     set undolevels=1000         " How many undos
     set undoreload=10000        " number of lines to save for undo
 endif
-" set undofile                " Save undo's after file closes
-" set undodir=~/.vim/undo
-" set undodir=$HOME/.vim/undo " where to save undo histories
 
 " show commands as you type them
 set sc

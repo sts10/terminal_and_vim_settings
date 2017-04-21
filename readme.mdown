@@ -21,11 +21,11 @@ Replace your current vimrc with mine by running:
 curl -o ~/.vimrc https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/vimrc
 ```
 
-If you're running Lubuntu/Ubuntu and Neovim, I suggest using this vim config file (though you'll need to [install vim-plug](https://github.com/junegunn/vim-plug#installation) yourself, as well as curl and git): 
+If you're running Ubuntu and Neovim v 2.X, I suggest using this vim config file (though you'll need to [install vim-plug](https://github.com/junegunn/vim-plug#installation) yourself beforehand, as well as curl and git): 
 
 ```shell
 mkdir ~/.config/nvim
-curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/lubuntu-init.vim
+curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/linux/init.vim
 ```
 
 #### Troubleshooting Vim Setup
