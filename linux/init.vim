@@ -1,5 +1,6 @@
 
 " vim-plug (https://github.com/junegunn/vim-plug) settings {{{
+" call plug#begin('~/.vim/plugged')
 call plug#begin('~/.config/nvim/plugged')
 " Basics
 Plug 'matze/vim-move'
@@ -153,7 +154,7 @@ autocmd FileType html vnoremap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4t
 " autocmd FileType html omap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4tags<CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
-let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim']
+let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim', 'xml']
 
 " nmap gx to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
@@ -185,14 +186,15 @@ if has("nvim")
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
 
-  " Have a straight-forward block cursor when using Neovim 2.0.X
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
-  set guicursor=
-
   " for fzf
   " imap <C-f> <plug>(fzf-complete-line)
 endif
 " }}}
+
+" Needed to have a straight-forward block cursor on Neovim 2.0.X
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
+set guicursor=
+
 
 """""""""""""""""""""""""""""
 " Standard Set Up           " {{{ 
@@ -211,6 +213,7 @@ syntax on
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
 colorscheme mustard
+" colorscheme flattened_dark
 set background=dark
 
 " Display relative line numbers
@@ -276,7 +279,6 @@ set directory=~/.config/nvim/swap//
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
     call system('mkdir ~/.config/nvim/undo')
-    
     " unclear if I should have one ore two forward slashes after undo in the
     " line below
     set undodir=~/.config/nvim/undo//
@@ -284,6 +286,9 @@ if has('persistent_undo')
     set undolevels=1000         " How many undos
     set undoreload=10000        " number of lines to save for undo
 endif
+" set undofile                " Save undo's after file closes
+" set undodir=~/.vim/undo
+" set undodir=$HOME/.vim/undo " where to save undo histories
 
 " show commands as you type them
 set sc
