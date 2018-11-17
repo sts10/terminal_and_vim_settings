@@ -1,40 +1,59 @@
-# A Back-up of My Terminal and Text Editor Setup Files
+# My Terminal/Text Editing Config Files (mostly for MacOS)
 
-This is a snapshot of my terminal and Vim-related configuration files. 
+This is a snapshot of my terminal and Vim-related configuration files. For my Ubuntu-specific configuration notes, [see this repo](https://github.com/sts10/linux-config).
 
-## To Use
+## Bash Profile
 
-### Bash Profile
 Rename `bash_profile` to `.bash_profile` and place it into `~/`. If no `~/.bash_profile` exists in your system yet, you can do this with `curl -o ~/.bash_profile https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/bash_profile` or, from inside this cloned repo: `cp bash_profile ~/.bash_profile`. Restart your terminal for changes to take effect.
 
 Note, this `bash_profile` sets `export USR_PATHS="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin"` and adds that to the PATH. Thus, you'll want to add things like the Sublime Text command line tool and other CLTs in `/usr/local/bin` to have easy access to them. 
 
 This `bash_profile` is based off [the Flatiron School's recommended bash profile](https://github.com/flatiron-school/dotfiles/blob/master/bash_profile).
 
-### Vim Setup
 
-Consider installing an up-to-date version your preferred type of Vim before starting this section. See section below.
+## Neovim 
 
-Replace your current vimrc with mine by running:
+If you want to go all-in on Neovim, do this:
 
-```shell
-curl -o ~/.vimrc https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/vimrc
+1. Make sure `git` and `curl` are installed (If you're running Ubuntu: `sudo apt update && sudo apt install git curl`)
+2. [Install Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim#macos--os-x)
+3. [Install vim-plug](https://github.com/junegunn/vim-plug#installation) 
+4. Copy my `init.vim` by running these commands:
+
+```bash
+mkdir ~/.config/nvim
+curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/neovim/init.vim
 ```
 
-If you're running Ubuntu and Neovim v 2.X, I suggest using the `init.vim` file in the `linux` directory of this repo as your vim config file (though you'll need to [install vim-plug](https://github.com/junegunn/vim-plug#installation) yourself beforehand, as well as curl and git).
+Optionally, if on Mac and you want a GUI: [Install vimr](https://github.com/qvacua/vimr/releases)
 
-```shell
+### Another Option for Linux
+
+If you're running Ubuntu and Neovim v 2.X, you're probably good with the `init.vim` above, but there is an older version of my `init.vim` for Linux here:
+
+```bash
 mkdir ~/.config/nvim
 curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/linux/init.vim
 ```
 
-#### Troubleshooting Vim Setup
+## Regular Vim
+
+If you don't want to use Neovim: First, consider installing an up-to-date version of Vim before starting this section (see section below).
+
+Replace your current vimrc with mine by running:
+
+```bash
+curl -o ~/.vimrc https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/vimrc
+```
+
+## Troubleshooting Vim Setup
+
 - If the above `curl` command isn't working for some reason, clone this directory and run `cp vimrc ~/.vimrc` from inside this repo's directory.
 - Maybe some directories weren't created correctly. My vimrc setup requires a few. You can manually `mkdir` the directories: `~/.vim`, `~/.vim/backup`, `~/.vim/swap`, `~/.vim/undo`
 - If you had trouble installing [vim-plug](https://github.com/junegunn/vim-plug) and/or our plugins, head over to [the vim-plug readme](https://github.com/junegunn/vim-plug#installation) for installation instructions. Afterward remember run `:PlugInstall` in a Vim buffer. 
 - If the set `Mustard` colorscheme doesn't automatically load, place `mustard.vim` into `~/.vim/colors/` (which you may have to `mkdir` yourself). Then either run `:colorscheme mustard` and then `set background=dark` or put those two commands into your `.vimrc` (they're already in the `vimrc` file in this repo).
 
-### Flavors of Vim
+## Flavors of Vim
 
 - Installing **MacVim**: [Download the .dmg file of the latest MacVim snapshot from the macvim-dev fork](https://github.com/macvim-dev/macvim/releases/) (though it may be better/easier to update MacVim if [installed from the command line via Homebrew](http://apple.stackexchange.com/questions/59375/how-do-i-install-macvim)). Once installed, you're going to want to setup the command line `mvim` command (should be included in the download) by putting the `mvim` file in place-- you can do this by running `cp mvim /usr/local/bin/` (although it might better to symlink it with `ln` command?). For help, here's [my blog post on making the switch](http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/).
 - Installing **Neovim**: [Instructions for installing NeoVim with Homebrew](https://github.com/neovim/homebrew-neovim/blob/master/README.md) plus [my blog post on NeoVim](http://sts10.github.io/blog/2015/08/11/neovim-an-open-source-project/). Homebrew [lives here](http://brew.sh/). Neovim's ["Following HEAD" page lives here](https://github.com/neovim/neovim/wiki/Following-HEAD). 
@@ -43,11 +62,11 @@ To symlink your normal Vim configuration for Neovim to use, run `ln -s ~/.vim ~/
 - Installing **VimR** (a MacOS GUI for Neovim): Head over to [the VimR releases page](https://github.com/qvacua/vimr/releases) and grab the latest version (you may also want to consult [the MacOS Neovim installation page](https://github.com/neovim/neovim/wiki/Installing-Neovim#macos--os-x)). Once you've installed VimR and moved it into your Applications folder, you can install the command line tool (`vimr`) by launching VimR, going to preferences, copying the command line tool to a directory, and then moving it into your path with a Terminal command like `mv vimrc /usr/local/bin/`. 
 - Installing **Neovim dot app**: [neovim dot app](https://github.com/rogual/neovim-dot-app) is an experimental MacOS GUI for Neovim. As of this writing you can install it via Homebrew. The command line tool is `gnvim`. Here is [my blog post about it](http://sts10.github.io/blog/2015/10/24/neovim-dot-app/).
 
-### Coding Font
+## Coding Font
 
-My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download). If unavailable, [Hack](https://github.com/chrissimpkins/Hack) and [Google's Noto Mono](https://www.google.com/get/noto/#mono-mono) are nice alternatives (and [Noto Sans](https://www.google.com/get/noto/#sans-lgc) size 16 or 18 is a good choice for your chat applications). [More info on my colors/font setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/). 
+My go-to coding font is [Deja Vu Sans Mono](http://dejavu-fonts.org/wiki/Download). If unavailable, [Hack](https://github.com/chrissimpkins/Hack), Droid Sans Mono, and [Google's Noto Mono](https://www.google.com/get/noto/#mono-mono) are nice alternatives (and [Noto Sans](https://www.google.com/get/noto/#sans-lgc) size 16 or 18 is a good choice for your chat applications). [More info on my colors/font setup](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/). 
 
-### Terminal
+## Terminal
 
 I'd recommend [iTerm2 v3.0.1+](https://iterm2.com/downloads.html). Some settings to change once installed:
 
@@ -63,7 +82,27 @@ I'd recommend [iTerm2 v3.0.1+](https://iterm2.com/downloads.html). Some settings
 
 If using OS X's default Terminal application (which I don't recommend given its handling of colors, particularly when using Vim), `sam_terminal_2015.terminal` can be imported as a profile. 
 
-### Sublime Text
+## As an alternative, you can try [Alacritty](https://github.com/jwilm/alacritty)
+
+[Install instructions](https://github.com/jwilm/alacritty#installation)
+
+Configuring Alacritty (v. 0.2.3): Move `alacritty.yml` to `~/.config/alacritty/alacritty.yml` by running: `curl -o ~/.config/alacritty/alacritty.yml https://raw.githubusercontent.com/sts10/terminal_and_vim_settings/master/alacritty/alacritty.yml`
+
+The built-in colorscheme is based off of [Pink Moon](https://github.com/sts10/vim-pink-moon).
+
+
+## tmux
+
+If you want to run tmux (`brew install tmux`) with Neovim, fix background color issues by putting this in `~/tmux.conf`:
+
+```
+# Neovim color help (https://github.com/neovim/neovim/issues/7764#issuecomment-411995268)
+set -g terminal-overrides ',xterm-256color:Tc'
+set -g default-terminal "tmux-256color"
+set -as terminal-overrides ',xterm*:sitm=\E[3m'
+```
+
+## Sublime Text
 
 I've also included two files related to my [Sublime Text 2](http://www.sublimetext.com/2) setup (though most preferences will carry over to [Sublime Text 3](http://www.sublimetext.com/3)). The two files are my user_preferences and my keybindings. 
 

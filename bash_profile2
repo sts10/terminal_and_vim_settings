@@ -208,6 +208,11 @@ function frontend {
   #ruby /Users/samschlinkert/Documents/code/em/url_to_article.rb "$1"
 #}
 
+function ss {
+  tmux new-session -d -s sync
+  tmux send-keys -t sync "syncthing -no-browser" Enter
+}
+
 function em {
   cwd=$(pwd) #save pwd as cwd
   cd /Users/samschlinkert/Documents/code/em/

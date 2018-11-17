@@ -3,7 +3,7 @@
 " call plug#begin('~/.vim/plugged')
 call plug#begin('~/.config/nvim/plugged')
 " Basics
-Plug 'matze/vim-move'
+" Plug 'matze/vim-move'
 Plug 'tpope/vim-commentary'
 Plug 'sickill/vim-pasta'
 Plug 'justinmk/vim-sneak'
@@ -16,6 +16,7 @@ Plug 'terryma/vim-smooth-scroll'
 Plug 'bronson/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-unimpaired'
+Plug 'google/vim-searchindex'
 Plug 'tmhedberg/matchit',          { 'for': ['html', 'xml'] }
 Plug 'sts10/vim-zipper'
 " Plug '~/Documents/code/vim-zipper'
@@ -35,18 +36,40 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rstacruz/vim-xtract'
 
 " colorschemes
+Plug 'sts10/vim-pink-moon'
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
+Plug 'reedes/vim-colors-pencil'
 Plug 'jacoborus/tender'
 Plug 'altercation/vim-colors-solarized'
 Plug 'romainl/flattened'
+Plug 'nightsense/seabird'
+Plug 'nightsense/carbonized'
+Plug 'flazz/vim-colorschemes'
+
+" autocomplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+Plug 'racer-rust/vim-racer', { 'for': ['rust', 'toml'] }
+set hidden
+let g:racer_cmd = "~/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
 
 " language or filetype specific
 Plug 'vim-ruby/vim-ruby',          { 'for': ['ruby', 'eruby'] }
 Plug 'tpope/vim-rails',            { 'for': ['ruby', 'eruby'] }
+Plug 'rust-lang/rust.vim'
 Plug 'nelstrom/vim-markdown-folding',{ 'for': 'markdown' }
 Plug 'dhruvasagar/vim-table-mode', { 'for': ['csv', 'xls', 'xlsx'] }
 Plug 'junegunn/goyo.vim',          { 'for': ['markdown', 'html', 'text'] }
+Plug 'junegunn/limelight.vim',     { 'for': ['markdown', 'html', 'text'] }
 Plug 'tpope/vim-markdown',         { 'for': 'markdown' }
 " Plug 'plasticboy/vim-markdown',    { 'for': 'markdown' }
 Plug 'othree/html5.vim'
@@ -88,14 +111,22 @@ let g:ctrlp_map = '<c-p>'
 nnoremap <Leader>s :split<CR><c-w>j<c-p>
 nnoremap <Leader>v :vsplit<CR><c-w>l<c-p>
 
+" vim-move set to <C-k> and <C-j>
+" let g:move_key_modifier = 'C'
+
+" Bubbling with vim-impaired.
+" Can't figure out why I can't make these noremap...
+nmap <C-j> ]e==
+nmap <C-k> [e==
+vmap <C-j> ]e==gv
+vmap <C-k> [e==gv
+
 " map control + l to commentary toggle comment for one line or visual
 " selection
 nmap <C-l> gcc
 vmap <C-l> gcgv
 imap <C-l> <ESC>gcc
 
-" vim-move set to <C-k> and <C-j>
-let g:move_key_modifier = 'C'
 
 " vim-closed-captioning
 autocmd Filetype srt nmap gJ <Plug>JoinCaption
@@ -103,6 +134,10 @@ autocmd Filetype srt nmap gK <Plug>SplitCaption
 
 autocmd Filetype srt nmap gS mx^~`x
 autocmd Filetype srt nmap <C-s> mx^~`x
+
+" Rust formatter https://github.com/rust-lang/rust.vim#formatting-with-rustfmt
+" autocmd Filetype rust nnoremap == :RustFmt<CR>
+let g:rustfmt_autosave = 1
 
 " Easier page navigation
 nnoremap <C-e> <C-u>
@@ -125,24 +160,50 @@ vmap <S-Tab> <Plug>Sneak_S
 " nmap S <Plug>Sneak_S
 
 " Goyo (distraction-free)
-let g:goyo_width="80%"
+let g:goyo_width = 68
 nnoremap <Leader>g :Goyo<CR>
 function! s:goyo_enter()
-  set scrolloff=999
+  set noshowcmd            " Don't show last command
+  set noshowmode           " Don't show current mode
+  set scrolloff=999        " Centre current line
+  Limelight                " Enable paragraph focus mode
+  if has('gui_running')
+    colorscheme pencil
+    set background=light
+    set fullscreen         " Enter fullscreen (don't use Mac native fullscreen for this)
+    set linespace=7        " Extra leading is better for prose
+  elseif exists('$TMUX')   " Hide tmux bar
+    silent !tmux set status off
+  endif
+  let &l:statusline = '%M' " Show modified state on the bottom of the screen
+  " This automatically disables on Goyo leave
+  hi StatusLine
+        \ ctermfg=137
+        \ guifg=#be9873
+        \ cterm=NONE
+        \ gui=NONE
 endfunction
 function! s:goyo_leave()
-  set scrolloff=5
+  set showcmd            " Show last command
+  set showmode           " Show current mode
+  set scrolloff=5        " Always show five lines of context around the cursor
+  Limelight!             " Disable paragraph focus mode
+  colorscheme pink-moon          
+  set background=dark
+  if has('gui_running')
+    set nofullscreen     " Exit fullscreen
+    set linespace=3      " Standard leading
+  elseif exists('$TMUX') " Enable tmux bar
+    silent !tmux set status on
+  endif
 endfunction
 
 " Construct statusline
 
 set statusline=%f
 set statusline+=\ %h%w%m%r
-" set statusline+=%y
-" set statusline+=%=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 set statusline+=%17(%{exists('g:loaded_fugitive')?fugitive#statusline():''}\%)
 set statusline+=%=
-" set statusline+=%-16(\ %l/%L\%)%P   
 set statusline+=\ %{noscrollbar#statusline(9,'_','=')}
 set statusline+=\ %P/%L
 set statusline+=\ 
@@ -154,14 +215,13 @@ autocmd FileType html vnoremap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4t
 " autocmd FileType html omap <C-m> :'<,'> !/usr/local/bin/Markdown.pl --html4tags<CR>
 
 " vim-markdown: enable enable fenced code block syntax highlighting in markdown documents
-let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim', 'xml']
+let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'vim', 'xml', 'rust']
 
 " nmap gx to visually select a URI and then open it in default browser
 " see: http://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/
 
 " nmap gx mxviugx<Esc>`x
 nnoremap <silent> gx :normal mxviugx<Esc>`x
-" nmap go mxviugx<Esc>`x
 
 " remap gX to open current file with system open command
 " i.e. an HTML file will open in your default browser
@@ -212,8 +272,7 @@ syntax on
 
 " set font for gui vim
 set guifont=DejaVu\ Sans\ Mono:h20
-colorscheme mustard
-" colorscheme flattened_dark
+colorscheme pink-moon
 set background=dark
 
 " Display relative line numbers
@@ -263,12 +322,13 @@ set nowrap
 autocmd FileType text setlocal wrap
 autocmd FileType html setlocal wrap
 autocmd FileType markdown setlocal wrap
+autocmd FileType srt setlocal wrap
 
 " And when Vim does wrap lines, have it break the lines on spaces and punctuation only (http://vim.wikia.com/wiki/Word_wrap_without_line_breaks)
 set linebreak
 
-" Save temporary/backup files not in the local directory, but in your ~/.vim
-" directory, to keep them out of git repos. 
+" Save temporary/backup files not in the local directory, but in your
+" ~/.config/nvim directory, to keep them out of git repos. 
 " But first mkdir backup, swap, and undo first to make this work
 call system('mkdir ~/.config/nvim')
 call system('mkdir ~/.config/nvim/backup')
@@ -286,9 +346,6 @@ if has('persistent_undo')
     set undolevels=1000         " How many undos
     set undoreload=10000        " number of lines to save for undo
 endif
-" set undofile                " Save undo's after file closes
-" set undodir=~/.vim/undo
-" set undodir=$HOME/.vim/undo " where to save undo histories
 
 " show commands as you type them
 set sc
@@ -312,10 +369,18 @@ set shiftwidth=2
 autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal shiftwidth=4
 
+autocmd FileType rust setlocal tabstop=4
+autocmd FileType rust setlocal shiftwidth=4
+
 " auto indent
 set autoindent
 set smartindent 
 set breakindent
+
+" indent <style> tag (see :help html_indenting)
+" https://www.reddit.com/r/vim/comments/97e33c/autoindent_bugs_regarding_html_style_tags/e47ivb9/
+let g:html_indent_style1 = "auto"
+let g:html_indent_script1 = "auto"
 
 " turn on the wildmenu cuz everyone says to
 set wildmenu
@@ -390,11 +455,6 @@ autocmd FileType html,markdown,text nnoremap <expr> k v:count ? 'k' : 'gk'
 autocmd FileType html,markdown,text vnoremap <expr> j v:count ? 'j' : 'gj'
 autocmd FileType html,markdown,text vnoremap <expr> k v:count ? 'k' : 'gk'
 
-" autocmd FileType markdown nnoremap <expr> j v:count ? 'j' : 'gj'
-" autocmd FileType markdown nnoremap <expr> k v:count ? 'k' : 'gk'
-" autocmd FileType text nnoremap <expr> j v:count ? 'j' : 'gj'
-" autocmd FileType text nnoremap <expr> k v:count ? 'k' : 'gk'
-
 " Make the dot command work as expected in visual mode (via
 " https://www.reddit.com/r/vim/comments/3y2mgt/do_you_have_any_minor_customizationsmappings_that/cya0x04)
 vnoremap . :norm.<CR>
@@ -410,8 +470,8 @@ endfunction
 
 " In markdown files, Control + a surrounds highlighted text with square
 " brackets, then dumps system clipboard contents into parenthesis
-autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
-" autocmd FileType markdown nnoremap <c-t> yiwi[<Esc>ea](https://twitter.com/<Esc>pa)<Esc>
+" autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
+autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"+]pa)<Esc>
 
 " use gr to follow referenced links in markdown (relies on URI text object
 " plugin)
@@ -433,29 +493,43 @@ vmap x "_d
 nnoremap c "_c
 vnoremap c "_c
 
-" 0 is the 'yank register', and the ] formats it to indent you're pasting into. This command does all that with control + p (from http://vimcasts.org/episodes/meet-the-yank-register/)
-"nmap <c-p> "0]P
-
 " use leader to interact with the system clipboard {{{
-" maybe want to to consult this to make this file compatible with macOS and
-" Linux: https://gist.github.com/romainl/4df4cde3498fada91032858d7af213c2
-nnoremap <Leader>p "+]p
-nnoremap <Leader>P "+]P
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Linux"
+  nnoremap <Leader>p "+]p
+  nnoremap <Leader>P "+]P
 
-nnoremap <Leader>y :y+<cr>
-" nnoremap <Leader>y ma^"+y$`a
-nnoremap <Leader>c ^"+c$
-nnoremap <Leader>d ^"+d$
+  nnoremap <Leader>y :y+<cr>
+  " nnoremap <Leader>y ma^"+y$`a
+  nnoremap <Leader>c ^"+c$
+  nnoremap <Leader>d ^"+d$
 
-vnoremap <Leader>y "+y
-vnoremap <Leader>c "+c
-vnoremap <Leader>d "+d
+  vnoremap <Leader>y "+y
+  vnoremap <Leader>c "+c
+  vnoremap <Leader>d "+d
 
+
+  " place whole file on the system clipboard (and return cursor to where it was)
+  nnoremap <Leader>a :%y+<cr>
+else
+  nnoremap <Leader>p "*]p
+  nnoremap <Leader>P "*]P
+
+  nnoremap <Leader>y :y*<cr>
+  " nnoremap <Leader>y ma^"*y$`a
+  nnoremap <Leader>c ^"*c$
+  nnoremap <Leader>d ^"*d$
+
+  vnoremap <Leader>y "*y
+  vnoremap <Leader>c "*c
+  vnoremap <Leader>d "*d
+
+
+  " place whole file on the system clipboard (and return cursor to where it was)
+  " nmap <Leader>a maggVG"*y`a
+  nnoremap <Leader>a :%y*<cr>
+endif
 " }}}
-
-" place whole file on the system clipboard (and return cursor to where it was)
-" nmap <Leader>a maggVG"*y`a
-nnoremap <Leader>a :%y*<cr>
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -491,6 +565,19 @@ endfunction
 
 autocmd FileType javascript nnoremap gJ mjggvGJ<Esc>`j
 autocmd FileType javascript nnoremap gK :call UnMinify()<CR>
+
+function! MinCopy()
+  echo "running"
+  echom "running"
+  normal mjggVGJ
+  normal "*yy
+  %s/{\ze[^\r\n]/{\r/ge
+  %s/};\?\ze[^\r\n]/\0\r/ge
+  %s/;\ze[^\r\n]/;\r/ge
+  normal ggVG=`j
+endfunction
+
+nnoremap gb :call MinCopy()<CR><CR>
 
 " insert word of the line above
 inoremap <C-Y> <C-C>:let @z = @"<CR>mz
